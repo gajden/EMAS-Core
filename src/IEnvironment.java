@@ -18,4 +18,8 @@ public interface IEnvironment {
     public void swap(Agent firstAgent, Agent secondAgent);
     public int[] find(Agent agent);
     public Agent getAgent(int[] position);
+    public Agent getCurrent();
+    public void setAgent(Agent agent);
+    public boolean hasNext();
+    public Agent getBest();
 }

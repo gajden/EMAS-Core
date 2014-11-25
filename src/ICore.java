@@ -3,6 +3,5 @@
  */
 public interface ICore {
     public void initGUI();
-    public void startSimulation();
-    public void waitForStart();
+    public void startThisShit();
 }
