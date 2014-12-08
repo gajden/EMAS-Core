@@ -1,13 +1,24 @@
+package Logic;
 
+import Logic.IEnvironment;
+import Settings.EnvironmentSettings;
 
+import java.awt.*;
 import java.util.Map;
 
 /**
  * Created by Joanna on 2014-11-25.
  */
 public class Environment implements IEnvironment {
+    private List<Agent[]> islands;
+    private int currentIsland;
+    private int[] currentAgent;
+    private int numberOfIslands;
+    private int numberOfAgents;
+
+
     @Override
-    public void create(Map<String, int[]> settings) {
+    public void create(EnvironmentSettings settings) {
 
     }
 
@@ -42,8 +53,8 @@ public class Environment implements IEnvironment {
     }
 
     @Override
-    public Agent[] getNeighbours(Agent agent) {
-        return new Agent[0];
+    public Agent[] getNeighbours() {
+        if ()
     }
 
     @Override

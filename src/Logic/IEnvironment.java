@@ -1,10 +1,14 @@
+package Logic;
+
+import Settings.EnvironmentSettings;
+
 import java.util.Map;
 
 /**
  * Created by Joanna on 2014-11-24.
  */
 public interface IEnvironment {
-    public void create(Map<String, int[]> settings);
+    public void create(EnvironmentSettings settings);
     public void addAgent(int x, int y, Agent agent);
     public void deleteAgent(Agent agent);
     public Agent getFirst();
