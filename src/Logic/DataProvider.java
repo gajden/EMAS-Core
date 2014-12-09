@@ -2,7 +2,6 @@ package Logic;
 
 import Logic.IDataProvider;
 import Settings.AgentSettings;
-import Settings.DataForGui;
 import Settings.EnvironmentSettings;
 import Settings.SimulationSettings;
 
@@ -16,7 +15,6 @@ public class DataProvider implements IDataProvider {
     private AgentSettings agentSettings;
     private EnvironmentSettings environmentSettings;
     private SimulationSettings simulationSettings;
-    private DataForGui dataForGui;
     private Map<String, Float> settings;
 
     @Override

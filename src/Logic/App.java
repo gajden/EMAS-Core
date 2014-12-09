@@ -6,7 +6,8 @@ package Logic;
 public class App {
     public static void main(String[] args) {
         Core core = new Core();
-        core.initGUI();
+        core.init();
+        System.out.println("Core hula");
         while(true){
 
         }

@@ -84,7 +84,7 @@ public class Simulation implements ISimulation {
             }
         }
         agent.fight(fightCandidate);
-        this.checkFighting();
+        this.checkFighting(agent, fightCandidate);
     }
 
     private void generateStatistics(){
@@ -95,7 +95,7 @@ public class Simulation implements ISimulation {
         eventBus.post(simulationProgressEvent);
     }
 
-    private void checkFighting(){
+    private void checkFighting(Agent firstAgent, Agent secondAgent){
 
     }
 }

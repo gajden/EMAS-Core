@@ -1,7 +1,6 @@
 package Logic;
 
 import Settings.AgentSettings;
-import Settings.DataForGui;
 import Settings.EnvironmentSettings;
 import Settings.SimulationSettings;
 

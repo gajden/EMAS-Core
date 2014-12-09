@@ -29,4 +29,6 @@ public interface IEnvironment {
     public void setAgent(Agent agent);
     public boolean hasNext();
     public Agent getBest();
+    public float getAverage();
+    public float getWorst();
 }
