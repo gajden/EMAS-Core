@@ -13,4 +13,8 @@ public class SimulationSettings {
     public void setIterations(int iterations) {
         this.iterations = iterations;
     }
+
+    public void setDefaultIterations(){
+        this.iterations = 10;
+    }
 }

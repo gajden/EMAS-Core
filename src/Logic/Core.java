@@ -39,7 +39,7 @@ public class Core implements ICore {
 
     @Override
     @Subscribe public void simulationProgressEventHandler(SimulationProgressEvent event) {
-        dataProvider.updateDataForGui(event.getData());
+
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Core implements ICore {
     }
 
     private void distributeData(){
-        simulation.init(dataProvider);
+        simulation.init(dataProvider, eventBus);
     }
 
     private void registerEvents(){

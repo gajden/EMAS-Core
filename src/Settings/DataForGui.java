@@ -4,17 +4,18 @@ package Settings;
  * Created by Joanna on 2014-12-02.
  */
 public class DataForGui {
-    private double averadge;
+    private double average;
     private double best;
     private double worst;
+    private int iteration;
 
 
     public double getAveradge() {
-        return averadge;
+        return average;
     }
 
     public void setAveradge(double averadge) {
-        this.averadge = averadge;
+        this.average = averadge;
     }
 
     public double getBest() {
@@ -32,4 +33,13 @@ public class DataForGui {
     public void setWorst(double worst) {
         this.worst = worst;
     }
+
+    public int getIteration() {
+        return iteration;
+    }
+
+    public void setIteration(int iteration) {
+        this.iteration = iteration;
+    }
+
 }

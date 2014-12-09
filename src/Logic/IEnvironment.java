@@ -3,6 +3,9 @@ package Logic;
 import Settings.EnvironmentSettings;
 
 import java.util.Map;
+import Agent.Agent;
+
+
 
 /**
  * Created by Joanna on 2014-11-24.
@@ -15,7 +18,7 @@ public interface IEnvironment {
     public Agent getLast();
     public Agent getNext();
     public Agent getPrev();
-    public Agent[] getNeighbours(Agent agent);
+    public Agent[] getNeighbours();
     public int getNumberOfIslands();
     public int getNumberOfAgents();
     public void chooseIsland(int island);

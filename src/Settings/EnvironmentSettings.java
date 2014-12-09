@@ -23,7 +23,13 @@ public class EnvironmentSettings {
         this.numberOfAgents = numberOfAgents;
     }
 
+    public void setDefaultNumberOfIslands(){
+        this.numberOfIslands = 1;
+    }
 
+    public void setDefaultNumberOfAgents(){
+        this.numberOfAgents = 100;
+    }
 
 
 }

@@ -2,7 +2,8 @@ package Logic;
 
 import Settings.EnvironmentSettings;
 import Settings.SimulationSettings;
-import Agent.Agent
+import Agent.Agent;
+import com.google.common.eventbus.EventBus;
 
 /**
  * Created by Joanna on 2014-11-25.
@@ -13,10 +14,12 @@ public class Simulation implements ISimulation {
     private boolean inProgress = false;
     private SimulationSettings simulationSettings;
     private int currentIteration;
+    private EventBus eventBus;
 
 
     @Override
-    public void init(DataProvider dataProvider) {
+    public void init(DataProvider dataProvider, EventBus eventBus) {
+        this.eventBus = eventBus;
         this.environmentSettings = dataProvider.getEnvironmentSettings();
         this.setEnvironment();
         this.evolution();
@@ -27,6 +30,7 @@ public class Simulation implements ISimulation {
         this.evolution();
     }
 
+    @Override
     public boolean isInProgress(){
         return inProgress;
     }
@@ -49,6 +53,7 @@ public class Simulation implements ISimulation {
         while (currentIteration < simulationSettings.getIterations()){
             this.iterateIslands();
             ++currentIteration;
+            this.generateStatistics();
         }
         this.inProgress = false;
     }
@@ -64,7 +69,7 @@ public class Simulation implements ISimulation {
     private void iterateGrid(){
         environment.getFirst();
         while(environment.hasNext()){
-            environment.setAgent(this.chooseAction(environment.getCurrent()), environment.getNeighbours());
+            this.chooseAction(environment.getCurrent(), environment.getNeighbours());
         }
     }
 
@@ -75,6 +80,10 @@ public class Simulation implements ISimulation {
                 temp = neighbours[i];
             }
         }
+
+    }
+
+    private void generateStatistics(){
 
     }
 }

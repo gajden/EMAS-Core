@@ -4,13 +4,15 @@ import Logic.IEnvironment;
 import Settings.EnvironmentSettings;
 
 import java.awt.*;
+import java.util.LinkedList;
 import java.util.Map;
+import Agent.Agent;
 
 /**
  * Created by Joanna on 2014-11-25.
  */
 public class Environment implements IEnvironment {
-    private List<Agent[]> islands;
+    private LinkedList<Agent[]> islands;
     private int currentIsland;
     private int[] currentAgent;
     private int numberOfIslands;
@@ -54,7 +56,7 @@ public class Environment implements IEnvironment {
 
     @Override
     public Agent[] getNeighbours() {
-        if ()
+        return new Agent[0];
     }
 
     @Override
@@ -103,5 +105,7 @@ public class Environment implements IEnvironment {
     }
 
     @Override
-    public Agent getBest();
+    public Agent getBest(){
+        return null;
+    }
 }
