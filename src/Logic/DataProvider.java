@@ -45,11 +45,6 @@ public class DataProvider implements IDataProvider {
         return simulationSettings;
     }
 
-    @Override
-    public void updateDataForGui(DataForGui data) {
-
-    }
-
     private void sortSettings(){
         this.extractSimulationSettings();
         this.extractAgentSettings();

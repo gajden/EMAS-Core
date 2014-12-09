@@ -16,6 +16,5 @@ public interface IDataProvider {
     public void updateConfigData(String path);
     public EnvironmentSettings getEnvironmentSettings();
     public AgentSettings getAgentsSettings();
-    public void updateDataForGui(DataForGui data);
     public SimulationSettings getSimulationSettings();
 }

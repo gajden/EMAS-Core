@@ -8,12 +8,14 @@ import mock.GUI;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Joanna on 2014-11-24.
  */
 public class Core implements ICore {
     private GUI gui;
-    private Agent agent;
     private Simulation simulation;
     private DataProvider dataProvider;
     private EventBus eventBus;
@@ -24,14 +26,14 @@ public class Core implements ICore {
     @Override
     public void init() {
         this.createComponents();
-        this.loadConfig();
         this.registerEvents();
+        ready = true;
     }
 
     @Override
     @Subscribe public void startSimulationEventHandler(SimulationStartEvent event) {
         if(!simulation.isInProgress()) {
-            this.loadSettings();
+            this.loadSettings(event.getSettings());
             this.distributeData();
             simulation.start();
         }
@@ -39,7 +41,7 @@ public class Core implements ICore {
 
     @Override
     @Subscribe public void simulationProgressEventHandler(SimulationProgressEvent event) {
-
+        //gui to powinno obsluzyc
     }
 
     @Override
@@ -47,16 +49,12 @@ public class Core implements ICore {
 
     }
 
-    private void loadSettings(){
-        dataProvider.initDataProvider();
-    }
-
-    private void loadConfig(){
-
+    private void loadSettings(HashMap<String, Float> settings){
+        dataProvider.initDataProvider(settings);
     }
 
     private void createComponents(){
-        //gui = new GUI();
+        gui = new GUI();
         simulation = new Simulation();
         dataProvider = new DataProvider();
         eventBus = new EventBus();
@@ -69,6 +67,7 @@ public class Core implements ICore {
     private void registerEvents(){
         eventBus.register(this);
         eventBus.register(simulation);
+        eventBus.register(gui);
     }
 
 }

@@ -1,5 +1,6 @@
 package Logic;
 
+import Events.SimulationProgressEvent;
 import Settings.EnvironmentSettings;
 import Settings.SimulationSettings;
 import Agent.Agent;
@@ -15,10 +16,12 @@ public class Simulation implements ISimulation {
     private SimulationSettings simulationSettings;
     private int currentIteration;
     private EventBus eventBus;
+    private SimulationProgressEvent simulationProgressEvent;
 
 
     @Override
     public void init(DataProvider dataProvider, EventBus eventBus) {
+        simulationProgressEvent = new SimulationProgressEvent();
         this.eventBus = eventBus;
         this.environmentSettings = dataProvider.getEnvironmentSettings();
         this.setEnvironment();
@@ -74,16 +77,25 @@ public class Simulation implements ISimulation {
     }
 
     private void chooseAction(Agent agent, Agent[] neighbours){
-        Agent temp = neighbours[0];
+        Agent fightCandidate = neighbours[0];
         for(int i = 1; i < neighbours.length; i++){
-            if(!temp.better(neighbours[i])){
-                temp = neighbours[i];
+            if(fightCandidate.getFitness() > neighbours[i].getFitness()){
+                fightCandidate = neighbours[i];
             }
         }
-
+        agent.fight(fightCandidate);
+        this.checkFighting();
     }
 
     private void generateStatistics(){
+        simulationProgressEvent.setIteration(currentIteration);
+        simulationProgressEvent.setAverage(environment.getAverage());
+        simulationProgressEvent.setBest((float)environment.getBest().getFitness());
+        simulationProgressEvent.setWorst(environment.getWorst());
+        eventBus.post(simulationProgressEvent);
+    }
+
+    private void checkFighting(){
 
     }
 }

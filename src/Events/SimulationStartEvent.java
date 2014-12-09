@@ -2,17 +2,19 @@ package Events;
 
 import Settings.SimulationSettings;
 
+import java.util.HashMap;
+
 /**
  * Created by Joanna on 2014-12-02.
  */
 public class SimulationStartEvent {
-    private SimulationSettings settings;
+    private HashMap<String, Float> settings;
 
-    public void setSettings(SimulationSettings settings){
+    public void setSettings(HashMap<String, Float> settings){
         this.settings = settings;
     }
 
-    public SimulationSettings getSettings(){
+    public HashMap<String, Float> getSettings(){
         return settings;
     }
 }

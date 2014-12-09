@@ -20,6 +20,10 @@ public class Agent implements IAgent {
 
     private IFitnessProxy fitnessEvaluator;
 
+    public Agent(){
+
+    }
+
     public Agent(IFitnessProxy fitnessEvaluator) throws WrongGenotypeException {
         super();
         this.energy = energyOnStart;
