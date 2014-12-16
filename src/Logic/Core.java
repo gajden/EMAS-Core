@@ -1,24 +1,28 @@
 package Logic;
 
-import Events.SimulationEndEvent;
-import Events.SimulationProgressEvent;
-import Events.SimulationStartEvent;
 import Agent.Agent;
-import mock.GUI;
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import py4j.GatewayServer;
+import gui.StackEntryPoint;
+import gui.Stack;
+
+import java.util.List;
 
 /**
  * Created by Joanna on 2014-11-24.
  */
+@SuppressWarnings("unused")
 public class Core implements ICore {
-    private GUI gui;
+	private Process p = null;
+	private StackEntryPoint entryPoint;
+	private GatewayServer gatewayServer;
     private Simulation simulation;
     private DataProvider dataProvider;
-    private EventBus eventBus;
+    private Stack stack;
     private boolean ready = false;
 
 
@@ -26,27 +30,7 @@ public class Core implements ICore {
     @Override
     public void init() {
         this.createComponents();
-        this.registerEvents();
         ready = true;
-    }
-
-    @Override
-    @Subscribe public void startSimulationEventHandler(SimulationStartEvent event) {
-        if(!simulation.isInProgress()) {
-            this.loadSettings(event.getSettings());
-            this.distributeData();
-            simulation.start();
-        }
-    }
-
-    @Override
-    @Subscribe public void simulationProgressEventHandler(SimulationProgressEvent event) {
-        //gui to powinno obsluzyc
-    }
-
-    @Override
-    @Subscribe public void simulationEndEvent(SimulationEndEvent event) {
-
     }
 
     private void loadSettings(HashMap<String, Float> settings){
@@ -54,20 +38,36 @@ public class Core implements ICore {
     }
 
     private void createComponents(){
-        gui = new GUI();
-        simulation = new Simulation();
-        dataProvider = new DataProvider();
-        eventBus = new EventBus();
+    	this.entryPoint = new StackEntryPoint();
+    	this.gatewayServer=new GatewayServer(this.entryPoint, 25335);
+        this.simulation = new Simulation();
+        this.dataProvider = new DataProvider();
+        this.gatewayServer.start();
+        this.stack = this.entryPoint.getStack();
+        System.out.println("Gateway Server Started");
+		try {
+			this.p = Runtime.getRuntime().exec("python ./src/gui/emasgui.py ");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
     }
-
+    
+    public void start(){
+    	
+    }
+    
+    public void setData(String a){
+    	stack.push(a);
+    }
+    public List<String> getData(){
+    	return stack.getInternalList();
+    }
     private void distributeData(){
-        simulation.init(dataProvider, eventBus);
+        simulation.init(dataProvider);
     }
-
-    private void registerEvents(){
-        eventBus.register(this);
-        eventBus.register(simulation);
-        eventBus.register(gui);
+    public void clean (){
+    	this.p.destroy();
+    	this.gatewayServer.shutdown();
+    	System.out.println("Gateway Server & GUI Shutdown");
     }
-
 }

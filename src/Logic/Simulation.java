@@ -1,10 +1,8 @@
 package Logic;
 
-import Events.SimulationProgressEvent;
 import Settings.EnvironmentSettings;
 import Settings.SimulationSettings;
 import Agent.Agent;
-import com.google.common.eventbus.EventBus;
 
 /**
  * Created by Joanna on 2014-11-25.
@@ -15,14 +13,10 @@ public class Simulation implements ISimulation {
     private boolean inProgress = false;
     private SimulationSettings simulationSettings;
     private int currentIteration;
-    private EventBus eventBus;
-    private SimulationProgressEvent simulationProgressEvent;
 
 
     @Override
-    public void init(DataProvider dataProvider, EventBus eventBus) {
-        simulationProgressEvent = new SimulationProgressEvent();
-        this.eventBus = eventBus;
+    public void init(DataProvider dataProvider) {
         this.environmentSettings = dataProvider.getEnvironmentSettings();
         this.setEnvironment();
         this.evolution();
@@ -88,11 +82,7 @@ public class Simulation implements ISimulation {
     }
 
     private void generateStatistics(){
-        simulationProgressEvent.setIteration(currentIteration);
-        simulationProgressEvent.setAverage(environment.getAverage());
-        simulationProgressEvent.setBest((float)environment.getBest().getFitness());
-        simulationProgressEvent.setWorst(environment.getWorst());
-        eventBus.post(simulationProgressEvent);
+
     }
 
     private void checkFighting(Agent firstAgent, Agent secondAgent){

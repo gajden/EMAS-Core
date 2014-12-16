@@ -32,7 +32,8 @@ public class SimpleFunctionFitnessProxy implements IFitnessProxy {
             }
         }
         //get point with lowest value in simplex
-        double[] pointWithLowestValue;
+        @SuppressWarnings("unused")
+		double[] pointWithLowestValue;
         pointWithLowestValue=P[0];
         double lowestValue;
         lowestValue=f.getValueAt(P[0]);

@@ -3,6 +3,7 @@ package Logic;
 import Settings.EnvironmentSettings;
 
 import java.util.Map;
+
 import Agent.Agent;
 
 
@@ -10,6 +11,7 @@ import Agent.Agent;
 /**
  * Created by Joanna on 2014-11-24.
  */
+@SuppressWarnings("unused")
 public interface IEnvironment {
     public void create(EnvironmentSettings settings);
     public void addAgent(int x, int y, Agent agent);

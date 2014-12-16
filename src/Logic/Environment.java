@@ -6,11 +6,13 @@ import Settings.EnvironmentSettings;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.Map;
+
 import Agent.Agent;
 
 /**
  * Created by Joanna on 2014-11-25.
  */
+@SuppressWarnings("unused")
 public class Environment implements IEnvironment {
     private LinkedList<Agent[]> islands;
     private int currentIsland;
