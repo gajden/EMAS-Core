@@ -1,9 +1,9 @@
-package Logic;
+package core.logic;
 
-import Logic.IDataProvider;
-import Settings.AgentSettings;
-import Settings.EnvironmentSettings;
-import Settings.SimulationSettings;
+import core.logic.IDataProvider;
+import core.settings.AgentSettings;
+import core.settings.EnvironmentSettings;
+import core.settings.SimulationSettings;
 
 import java.util.HashMap;
 import java.util.Map;

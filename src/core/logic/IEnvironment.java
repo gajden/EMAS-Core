@@ -1,10 +1,10 @@
-package Logic;
+package core.logic;
 
-import Settings.EnvironmentSettings;
+import core.settings.EnvironmentSettings;
 
 import java.util.Map;
 
-import Agent.Agent;
+import agent.agent.Agent;
 
 
 

@@ -1,4 +1,4 @@
-package tests;
+package agent.tests;
 
 import static org.junit.Assert.*;
 
@@ -7,11 +7,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptions.WrongGenotypeException;
-import fitness_evaluator.SimpleFunctionFitnessProxy;
-import function.SimpleFunction;
-import genotype.FunctionGenotype;
-import genotype.Genotype;
+import agent.exceptions.WrongGenotypeException;
+import agent.fitness_evaluator.SimpleFunctionFitnessProxy;
+import agent.function.SimpleFunction;
+import agent.genotype.FunctionGenotype;
+import agent.genotype.Genotype;
 
 public class SimpleFunctionProxyTest {
 	

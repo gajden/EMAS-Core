@@ -1,8 +1,8 @@
-package genotype;
+package agent.genotype;
 
 import java.util.Random;
 
-import function.IFunction;
+import agent.function.IFunction;
 
 public class FunctionGenotype extends Genotype{
 	

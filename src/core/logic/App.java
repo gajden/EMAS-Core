@@ -1,4 +1,4 @@
-package Logic;
+package core.logic;
 
 import java.io.IOException;
 

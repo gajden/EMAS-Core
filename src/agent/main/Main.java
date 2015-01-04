@@ -1,14 +1,14 @@
-package main;
+package agent.main;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import agent.Agent;
-import agent.AgentFactory;
-import exceptions.WrongGenotypeException;
-import fitness_evaluator.SimpleFunctionFitnessProxy;
-import function.ExampleFunction;
+import agent.agent.Agent;
+import agent.agent.AgentFactory;
+import agent.exceptions.WrongGenotypeException;
+import agent.fitness_evaluator.SimpleFunctionFitnessProxy;
+import agent.function.ExampleFunction;
 
 
 

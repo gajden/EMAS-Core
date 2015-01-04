@@ -1,4 +1,4 @@
-package function;
+package agent.function;
 
 public interface IFunction {
 	public double getValueAt(double[] args);

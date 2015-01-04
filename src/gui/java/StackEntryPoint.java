@@ -1,4 +1,4 @@
-package gui;
+package gui.java;
 
 /**
  * Created by ant6 on 2014-12-04.

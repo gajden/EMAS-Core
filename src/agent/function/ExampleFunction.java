@@ -1,5 +1,5 @@
-package function;
-import function.IFunction;
+package agent.function;
+import agent.function.IFunction;
 
 
 public class ExampleFunction implements IFunction{

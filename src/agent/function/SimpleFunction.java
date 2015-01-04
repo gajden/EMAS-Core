@@ -1,4 +1,4 @@
-package function;
+package agent.function;
 
 public class SimpleFunction implements IFunction{
 	int n=1;

@@ -1,4 +1,4 @@
-package Settings;
+package core.settings;
 /**
  * Created by Joanna on 2014-12-02.
  */

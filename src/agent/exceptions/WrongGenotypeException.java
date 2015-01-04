@@ -1,6 +1,6 @@
-package exceptions;
+package agent.exceptions;
 
-import genotype.Genotype;
+import agent.genotype.Genotype;
 
 public class WrongGenotypeException extends Exception{
 	private Genotype genotype;

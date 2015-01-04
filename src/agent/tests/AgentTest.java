@@ -1,4 +1,4 @@
-package tests;
+package agent.tests;
 
 import static org.junit.Assert.*;
 
@@ -6,11 +6,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import agent.Agent;
-import exceptions.WrongGenotypeException;
-import fitness_evaluator.IFitnessProxy;
-import fitness_evaluator.SimpleFunctionFitnessProxy;
-import function.SimpleFunction;
+import agent.agent.Agent;
+import agent.exceptions.WrongGenotypeException;
+import agent.fitness_evaluator.IFitnessProxy;
+import agent.fitness_evaluator.SimpleFunctionFitnessProxy;
+import agent.function.SimpleFunction;
 
 public class AgentTest {
 	private IFitnessProxy proxy;

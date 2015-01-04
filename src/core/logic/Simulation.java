@@ -1,8 +1,8 @@
-package Logic;
+package core.logic;
 
-import Settings.EnvironmentSettings;
-import Settings.SimulationSettings;
-import Agent.Agent;
+import core.settings.EnvironmentSettings;
+import core.settings.SimulationSettings;
+import agent.agent.Agent;
 
 /**
  * Created by Joanna on 2014-11-25.

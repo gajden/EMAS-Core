@@ -1,7 +1,7 @@
-package agent;
+package agent.agent;
 
-import exceptions.WrongGenotypeException;
-import fitness_evaluator.IFitnessProxy;
+import agent.exceptions.WrongGenotypeException;
+import agent.fitness_evaluator.IFitnessProxy;
 
 public class AgentFactory {
 	private double energyLossFactor=50;

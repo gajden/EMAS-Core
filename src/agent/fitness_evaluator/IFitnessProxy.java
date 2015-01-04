@@ -1,7 +1,7 @@
-package fitness_evaluator;
+package agent.fitness_evaluator;
 
-import exceptions.WrongGenotypeException;
-import genotype.Genotype;
+import agent.exceptions.WrongGenotypeException;
+import agent.genotype.Genotype;
 
 public interface IFitnessProxy {
 	public double evaluateFitness(Genotype genotype) throws WrongGenotypeException;

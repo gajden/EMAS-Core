@@ -1,4 +1,4 @@
-package Logic;
+package core.logic;
 
 /**
  * Created by Joanna on 2014-11-24.

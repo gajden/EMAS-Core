@@ -1,11 +1,11 @@
-package agent;
+package agent.agent;
 
 
-import exceptions.WrongGenotypeException;
-import fitness_evaluator.IFitnessProxy;
-import fitness_evaluator.SimpleFunctionFitnessProxy;
-import function.IFunction;
-import genotype.Genotype;
+import agent.exceptions.WrongGenotypeException;
+import agent.fitness_evaluator.IFitnessProxy;
+import agent.fitness_evaluator.SimpleFunctionFitnessProxy;
+import agent.function.IFunction;
+import agent.genotype.Genotype;
 
 
 public class Agent{
@@ -33,6 +33,10 @@ public class Agent{
 		this.fitness = this.fitnessEvaluator.evaluateFitness(genotype);
 	}
 	
+	public Agent() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setEnergy(double energy) {
 		this.energy = energy;
 	}

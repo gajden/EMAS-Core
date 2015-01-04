@@ -1,4 +1,4 @@
-package tests;
+package agent.tests;
 
 import static org.junit.Assert.*;
 
@@ -6,10 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import function.IFunction;
-import function.SimpleFunction;
-import genotype.FunctionGenotype;
-import genotype.Genotype;
+import agent.function.IFunction;
+import agent.function.SimpleFunction;
+import agent.genotype.FunctionGenotype;
+import agent.genotype.Genotype;
 
 public class FunctionGenotypeTest {
 	private IFunction f;

@@ -1,14 +1,14 @@
-package Logic;
+package core.logic;
 
-import Agent.Agent;
+import agent.agent.Agent;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import py4j.GatewayServer;
-import gui.StackEntryPoint;
-import gui.Stack;
+import gui.java.StackEntryPoint;
+import gui.java.Stack;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class Core implements ICore {
         this.stack = this.entryPoint.getStack();
         System.out.println("Gateway Server Started");
 		try {
-			this.p = Runtime.getRuntime().exec("python ./src/gui/emasgui.py ");
+			this.p = Runtime.getRuntime().exec("python ./src/gui/python/emasgui.py ");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

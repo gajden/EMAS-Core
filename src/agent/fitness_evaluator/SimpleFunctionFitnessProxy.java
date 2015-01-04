@@ -1,10 +1,10 @@
-package fitness_evaluator;
+package agent.fitness_evaluator;
 
 
-import exceptions.WrongGenotypeException;
-import function.IFunction;
-import genotype.FunctionGenotype;
-import genotype.Genotype;
+import agent.exceptions.WrongGenotypeException;
+import agent.function.IFunction;
+import agent.genotype.FunctionGenotype;
+import agent.genotype.Genotype;
 
 
 public class SimpleFunctionFitnessProxy implements IFitnessProxy {

@@ -1,13 +1,13 @@
-package Logic;
+package core.logic;
 
-import Logic.IEnvironment;
-import Settings.EnvironmentSettings;
+import core.logic.IEnvironment;
+import core.settings.EnvironmentSettings;
 
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.Map;
 
-import Agent.Agent;
+import agent.agent.Agent;
 
 /**
  * Created by Joanna on 2014-11-25.
