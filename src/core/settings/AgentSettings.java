@@ -55,4 +55,8 @@ public class AgentSettings {
     public void setDefaultMinEnergy() {
         this.minEnergy=0;
     }
+	public void setDefaultGenotypeRandomnessFactor() {
+		this.genotypeRandomnessFactor = 0.2;
+		
+	}
 }

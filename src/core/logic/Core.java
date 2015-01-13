@@ -53,9 +53,7 @@ public class Core implements ICore {
     }
     
     public void start(){
-    	System.out.println("energy on start: " + dataProvider.getAgentsSettings().getEnergyOnStart());
-    	System.out.println("iterations: " + dataProvider.getSimulationSettings().getIterations());
-    	System.out.println("number of islands: " + dataProvider.getEnvironmentSettings().getNumberOfIslands());
+    	this.distributeData();
     }
     
     public void initProv(Map<String, Double> settings){

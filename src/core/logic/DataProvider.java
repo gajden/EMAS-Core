@@ -62,7 +62,11 @@ public class DataProvider implements IDataProvider {
             agentSettings.setEnergyOnStart(settings.get("energyOnStart"));
         else
             agentSettings.setDefaultEnergyOnStart();
-
+        
+        if(settings.containsKey("genotypeRandomnessFactor"))
+            agentSettings.setGenotypeRandomnessFactor(settings.get("genotypeRandomnessFactor"));
+        else
+            agentSettings.setDefaultGenotypeRandomnessFactor();
 
         if(settings.containsKey("energyLossFactor"))
             agentSettings.setEnergyLossFactor(settings.get("energyLossFactor"));
@@ -81,12 +85,12 @@ public class DataProvider implements IDataProvider {
             environmentSettings.setNumberOfIslands(settings.get("numberOfIslands").intValue());
         else
             environmentSettings.setDefaultNumberOfIslands();
-
+        
         if(settings.containsKey("numberOfAgents"))
             environmentSettings.setNumberOfAgents(settings.get("numberOfAgents").intValue());
         else
             environmentSettings.setDefaultNumberOfAgents();
-
+       
     }
 
     private void extractSimulationSettings(){

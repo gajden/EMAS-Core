@@ -16,6 +16,7 @@ public class App {
 			e.printStackTrace();
 		}
         Map<String, Double> map = core.parseData(core.getData());
+        //System.out.println(map);
         core.initProv(map);
         core.start();
         core.clean();

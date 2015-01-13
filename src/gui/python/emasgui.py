@@ -21,15 +21,13 @@ hideSet = []
 
 gatewayPort = 25336
 
-emasValues = {"agents": 0,
+emasValues = {"numberOfAgents": 2000.9,
               "dimensions": 1,
               "leftinterval": 0,
               "rightinterval": 0,
-              "iterations": 0,
-              "energyOnStart" : 100,
+              "iterations": 3,
               "energyLossFactor" : 10,
-              "numberOfIslands" : 1,
-              "numbersOfAgents" : 0
+              "numberOfIslands" : 18,
               }
 
 window = Tk()
@@ -141,15 +139,13 @@ def hideBasicGUI():
 
 
 def resetEmasValues():
-    emasValues = {"agents": 0,
+    emasValues = {"numberOfAgents": 2000.9,
               "dimensions": 1,
               "leftinterval": 0,
               "rightinterval": 0,
               "iterations": 0,
-              "energyOnStart" : 100,
               "energyLossFactor" : 10,
-              "numberOfIslands" : 1,
-              "numbersOfAgents" : 0
+              "numberOfIslands" : 18,
               }
 
 

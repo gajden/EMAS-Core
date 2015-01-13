@@ -3,6 +3,7 @@ package core.logic;
 import core.settings.EnvironmentSettings;
 import core.settings.SimulationSettings;
 import agent.agent.Agent;
+import agent.agent.AgentFactory;
 
 /**
  * Created by Joanna on 2014-11-25.
@@ -13,13 +14,21 @@ public class Simulation implements ISimulation {
     private boolean inProgress = false;
     private SimulationSettings simulationSettings;
     private int currentIteration;
+    private AgentFactory agentFactory;
 
 
     @Override
     public void init(DataProvider dataProvider) {
+    	this.simulationSettings = dataProvider.getSimulationSettings();
         this.environmentSettings = dataProvider.getEnvironmentSettings();
-        this.setEnvironment();
-        this.evolution();
+        this.currentIteration = 1;
+        this.setEnvironment();        
+        this.agentFactory = new AgentFactory(dataProvider.getAgentsSettings().getEnergyLossFactor(), 
+        									dataProvider.getAgentsSettings().getEenotypeRandomnessFactor(), 
+        									dataProvider.getAgentsSettings().getEnergyOnStart(), 
+        									null/*IFitnessProxy*/);
+        //this.evolution();
+        System.out.println("ile iteracji: " + this.simulationSettings.getIterations() + ", current Iteration: "+ this.currentIteration);
     }
 
     @Override
@@ -34,7 +43,7 @@ public class Simulation implements ISimulation {
 
     private void setEnvironment(){
         environment = new Environment();
-        environment.create(environmentSettings);
+        environment.create(this.environmentSettings);
         this.fillEnvironment();
     }
 

@@ -17,13 +17,20 @@ public class Environment implements IEnvironment {
     private LinkedList<Agent[]> islands;
     private int currentIsland;
     private int[] currentAgent;
-    private int numberOfIslands;
-    private int numberOfAgents;
+    private EnvironmentSettings settings;
 
 
     @Override
     public void create(EnvironmentSettings settings) {
-
+    	
+    	this.settings = settings;
+    	this.currentIsland = 0;
+    	this.islands = new LinkedList<Agent[]>();
+    	for (int i = 0; i<this.settings.getNumberOfIslands(); i++){
+    		Agent[] a = new Agent[this.settings.getNumberOfAgents()];
+    		islands.add(a);
+    	}
+    	System.out.println("ilosc wysp: "+this.settings.getNumberOfIslands() +" ilosc agentow: "+ this.settings.getNumberOfAgents());
     }
 
     @Override
@@ -63,12 +70,12 @@ public class Environment implements IEnvironment {
 
     @Override
     public int getNumberOfIslands() {
-        return 0;
+        return settings.getNumberOfIslands();
     }
 
     @Override
     public int getNumberOfAgents() {
-        return 0;
+        return settings.getNumberOfAgents();
     }
 
     @Override
