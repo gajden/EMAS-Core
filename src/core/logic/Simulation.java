@@ -52,16 +52,19 @@ public class Simulation implements ISimulation {
     }
 
     private void fillEnvironment(){
-        environment.getFirst();
-        while (environment.hasNext()){
-            try {
-				environment.setAgent(agentFactory.createAgent());
-			} catch (WrongGenotypeException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            environment.getNext();
-        }
+    	for(int i=0; i < environmentSettings.getNumberOfIslands(); i++){
+    		environment.chooseIsland(i);
+    		environment.getFirst();
+        	while (environment.hasNext()){
+            	try {
+					environment.setAgent(agentFactory.createAgent());
+				} catch (WrongGenotypeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	environment.getNext();
+        	}
+    	}
     }
 
     private void evolution(){
