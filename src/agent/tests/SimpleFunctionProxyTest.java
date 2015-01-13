@@ -13,6 +13,7 @@ import agent.function.SimpleFunction;
 import agent.genotype.FunctionGenotype;
 import agent.genotype.Genotype;
 
+@SuppressWarnings("unused")
 public class SimpleFunctionProxyTest {
 	
 	SimpleFunction f;

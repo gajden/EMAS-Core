@@ -14,7 +14,8 @@ public class Simulation implements ISimulation {
     private boolean inProgress = false;
     private SimulationSettings simulationSettings;
     private int currentIteration;
-    private AgentFactory agentFactory;
+    @SuppressWarnings("unused")
+	private AgentFactory agentFactory;
 
 
     @Override
