@@ -3,7 +3,7 @@ package agent.agent;
 import agent.exceptions.WrongGenotypeException;
 import agent.fitness_evaluator.IFitnessProxy;
 
-public class AgentFactory {
+public class AgentFactory implements IAgentFactory {
 	private double energyLossFactor=50;
 	private double genotypeRandomnessFactor=0.2; //factor which defines the probability of mutation
 	private double energyOnStart=100.0;
@@ -25,19 +25,22 @@ public class AgentFactory {
 
 	
 	
-	public void setEnergyLossFactor(double energyLossFactor) {
+	@Override
+    public void setEnergyLossFactor(double energyLossFactor) {
 		this.energyLossFactor = energyLossFactor;
 	}
 
 
 
-	public void setGenotypeRandomnessFactor(double genotypeRandomnessFactor) {
+	@Override
+    public void setGenotypeRandomnessFactor(double genotypeRandomnessFactor) {
 		this.genotypeRandomnessFactor = genotypeRandomnessFactor;
 	}
 
 
 
-	public void setEnergyOnStart(double energyOnStart) {
+	@Override
+    public void setEnergyOnStart(double energyOnStart) {
 		this.energyOnStart = energyOnStart;
 	}
 
@@ -48,7 +51,8 @@ public class AgentFactory {
 		this.fitnessEvaluator = fitnessEvaluator;
 	}
 	
-	public Agent createAgent() throws WrongGenotypeException{
+	@Override
+    public Agent createAgent() throws WrongGenotypeException{
 		Agent agent = new Agent(energyLossFactor, genotypeRandomnessFactor, energyOnStart,fitnessEvaluator);
 		return agent;
 	}

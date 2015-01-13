@@ -9,7 +9,7 @@ import agent.genotype.Genotype;
 
 
 @SuppressWarnings("unused")
-public class Agent{
+public class Agent implements IAgent {
 
 	private double energy; 
 	private double fitness;
@@ -38,32 +38,39 @@ public class Agent{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void setEnergy(double energy) {
+	@Override
+    public void setEnergy(double energy) {
 		this.energy = energy;
 	}
 
-	public void setFitness(double fitness) {
+	@Override
+    public void setFitness(double fitness) {
 		this.fitness = fitness;
 	}
 
 
-	public Genotype getGenotype() {
+	@Override
+    public Genotype getGenotype() {
 		return genotype;
 	}
 
-	public void setGenotype(Genotype genotype) {
+	@Override
+    public void setGenotype(Genotype genotype) {
 		this.genotype = genotype;
 	}
 
-	public double getEnergy() {
+	@Override
+    public double getEnergy() {
 		return energy;
 	}
 
-	public double getFitness() {
+	@Override
+    public double getFitness() {
 		return fitness;
 	}
 
-	public void fight(Agent agent2) {
+	@Override
+    public void fight(Agent agent2) {
 		if(agent2.getFitness()<fitness){
 			
 			agent2.energy=agent2.energy-energyLossFactor;
@@ -78,7 +85,8 @@ public class Agent{
 	}
 
 	
-	public Agent hybridize(Agent agent2) throws WrongGenotypeException {
+	@Override
+    public Agent hybridize(Agent agent2) throws WrongGenotypeException {
 		Genotype gen= genotype.hybridize(agent2.getGenotype(), genotypeRandomnessFactor);
 		AgentFactory factory = new AgentFactory(energyLossFactor, genotypeRandomnessFactor, energyOnStart, fitnessEvaluator);
 		

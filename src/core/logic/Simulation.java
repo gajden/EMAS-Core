@@ -1,5 +1,6 @@
 package core.logic;
 
+import core.settings.AgentSettings;
 import core.settings.EnvironmentSettings;
 import core.settings.SimulationSettings;
 import agent.agent.Agent;
@@ -18,6 +19,7 @@ public class Simulation implements ISimulation {
     private SimulationSettings simulationSettings;
     private int currentIteration;
     private AgentFactory agentFactory;
+    private AgentSettings agentSettings;
 
 
     @Override
@@ -32,7 +34,7 @@ public class Simulation implements ISimulation {
         									dataProvider.getAgentsSettings().getEnergyOnStart(), 
         									asdasd);
         //this.evolution();
-        System.out.println("ile iteracji: " + this.simulationSettings.getIterations() + ", current Iteration: "+ this.currentIteration);
+        System.out.println("ile iteracji: " + this.simulationSettings.getIterations() + ", current Iteration: " + this.currentIteration);
     }
 
     @Override
@@ -80,11 +82,11 @@ public class Simulation implements ISimulation {
         int islands = environment.getNumberOfIslands();
         for (int i = 0; i < islands; ++i){
             environment.chooseIsland(i);
-            this.iterateGrid();
+            this.iterateAgents();
         }
     }
 
-    private void iterateGrid(){
+    private void iterateAgents(){
         environment.getFirst();
         while(environment.hasNext()){
             this.chooseAction(environment.getCurrent(), environment.getNeighbours());
@@ -93,20 +95,30 @@ public class Simulation implements ISimulation {
 
     private void chooseAction(Agent agent, Agent[] neighbours){
         Agent fightCandidate = neighbours[0];
+        int index;
         for(int i = 1; i < neighbours.length; i++){
             if(fightCandidate.getFitness() > neighbours[i].getFitness()){
                 fightCandidate = neighbours[i];
+                
             }
         }
         agent.fight(fightCandidate);
-        this.checkFighting(agent, fightCandidate);
+
+        if(environment.getCurrent().getEnergy() < agentSettings.getMinEnergy())
+            try {
+                environment.setAgent(agentFactory.createAgent());
+            }catch (Exception e){ }
+        else if(fightCandidate.getEnergy() <  agentSettings.getMinEnergy()){
+
+        }
+
     }
 
     private void generateStatistics(){
 
     }
 
-    private void checkFighting(Agent firstAgent, Agent secondAgent){
+    private void checkWounded(Agent firstAgent, Agent secondAgent){
 
     }
 }
