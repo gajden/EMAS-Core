@@ -4,6 +4,9 @@ import core.settings.EnvironmentSettings;
 import core.settings.SimulationSettings;
 import agent.agent.Agent;
 import agent.agent.AgentFactory;
+import agent.exceptions.WrongGenotypeException;
+import agent.fitness_evaluator.SimpleFunctionFitnessProxy;
+import agent.function.SimpleFunction;
 
 /**
  * Created by Joanna on 2014-11-25.
@@ -14,12 +17,12 @@ public class Simulation implements ISimulation {
     private boolean inProgress = false;
     private SimulationSettings simulationSettings;
     private int currentIteration;
-    @SuppressWarnings("unused")
-	private AgentFactory agentFactory;
+    private AgentFactory agentFactory;
 
 
     @Override
     public void init(DataProvider dataProvider) {
+    	SimpleFunctionFitnessProxy asdasd = new SimpleFunctionFitnessProxy(new SimpleFunction());
     	this.simulationSettings = dataProvider.getSimulationSettings();
         this.environmentSettings = dataProvider.getEnvironmentSettings();
         this.currentIteration = 1;
@@ -27,7 +30,7 @@ public class Simulation implements ISimulation {
         this.agentFactory = new AgentFactory(dataProvider.getAgentsSettings().getEnergyLossFactor(), 
         									dataProvider.getAgentsSettings().getEenotypeRandomnessFactor(), 
         									dataProvider.getAgentsSettings().getEnergyOnStart(), 
-        									null/*IFitnessProxy*/);
+        									asdasd);
         //this.evolution();
         System.out.println("ile iteracji: " + this.simulationSettings.getIterations() + ", current Iteration: "+ this.currentIteration);
     }
@@ -51,7 +54,12 @@ public class Simulation implements ISimulation {
     private void fillEnvironment(){
         environment.getFirst();
         while (environment.hasNext()){
-            environment.setAgent(new Agent());
+            try {
+				environment.setAgent(agentFactory.createAgent());
+			} catch (WrongGenotypeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             environment.getNext();
         }
     }

@@ -22,7 +22,6 @@ public class Environment implements IEnvironment {
 
     @Override
     public void create(EnvironmentSettings settings) {
-    	
     	this.settings = settings;
     	this.currentIsland = 0;
     	this.islands = new LinkedList<Agent[]>();
