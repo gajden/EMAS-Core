@@ -8,6 +8,7 @@ import agent.function.IFunction;
 import agent.genotype.Genotype;
 
 
+@SuppressWarnings("unused")
 public class Agent{
 
 	private double energy; 

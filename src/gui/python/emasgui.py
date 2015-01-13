@@ -1,3 +1,4 @@
+__author__ = 'ant6'
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
@@ -18,13 +19,18 @@ debug = True
 show_buttons = True
 hideSet = []
 
-gatewayPort = 25335
+gatewayPort = 25336
 
 emasValues = {"agents": 0,
-              "dimensions": 0,
+              "dimensions": 1,
               "leftinterval": 0,
               "rightinterval": 0,
-              "iterationspergraph": 0}
+              "iterations": 0,
+              "energyOnStart" : 100,
+              "energyLossFactor" : 10,
+              "numberOfIslands" : 1,
+              "numbersOfAgents" : 0
+              }
 
 window = Tk()
 winWid = int(window.winfo_screenwidth() * 0.8)
@@ -47,6 +53,7 @@ dataPlot = FigureCanvasTkAgg(f, master=window)
 def spanBasicLabels(wrapper):
     '''
     Labels for starting window
+    :return:
     '''
     basicLabelSett = {"font": labelFont, "width": 30, "anchor": W, "wraplength": "500"}
 
@@ -79,6 +86,7 @@ def spanBasicLabels(wrapper):
 def spanBasicEntries(wrapper):
     '''
     Entries for starting window
+    :return:
     '''
     basicEntrySett = {"font": labelFont, "width": "9", "justify": LEFT, "state": "normal", "takefocus": "yes"}
 
@@ -98,8 +106,9 @@ def spanBasicEntries(wrapper):
 def spanBasicButtons(wrapper):
     '''
     Buttons for starting window
+    :return:
     '''
-    butStart = Button(wrapper, text='Start simulation', command=plotData, width=15)
+    butStart = Button(wrapper, text='Start simulation', command=startCommunication, width=15)
     butStart.place(x=buttonXPos, y=buttonYPos + 0)
     hideSet.append(butStart)
 
@@ -115,6 +124,7 @@ def spanBasicButtons(wrapper):
 def spanBasicGUI(wrapper):
     '''
     Show Basic GUI for starting simulation
+    :return:
     '''
     spanBasicLabels(wrapper)
     spanBasicEntries(wrapper)
@@ -122,19 +132,33 @@ def spanBasicGUI(wrapper):
 
 
 def hideBasicGUI():
+    '''
+    Hiding GUI widgets
+    :return:
+    '''
     for e in hideSet:
         e.destroy()
 
 
 def resetEmasValues():
     emasValues = {"agents": 0,
-                  "dimensions": 0,
-                  "leftinterval": 0,
-                  "rightinterval": 0,
-                  "iterationspergraph": 0}
+              "dimensions": 1,
+              "leftinterval": 0,
+              "rightinterval": 0,
+              "iterations": 0,
+              "energyOnStart" : 100,
+              "energyLossFactor" : 10,
+              "numberOfIslands" : 1,
+              "numbersOfAgents" : 0
+              }
 
 
 def parseInputFile(loadfile):
+    '''
+    Parsing given file and looking for waned parameters
+    :param loadfile:
+    :return:
+    '''
     f = loadfile.readlines()
     f = [e.strip() for e in f]
     # resetEmasValues()
@@ -150,7 +174,7 @@ def parseInputFile(loadfile):
                 except (TypeError, ValueError):
                     wrongVals += q + ' '
                 emasValues[q] = temp
-            elif (wrongVals.find(q) < 0) and (emasValues[q] == ''):
+            elif (wrongVals.find(q) < 0) and (emasValues[q] == '' or emasValues[q] == 0):
                 wrongVals += q + ' '
 
     tkMessageBox.showerror("Load config from file",
@@ -161,6 +185,10 @@ def parseInputFile(loadfile):
 
 
 def showLoadDialog():
+    '''
+    Shows dialog for humans to choose a file
+    :return:
+    '''
     loadfile = ''
     try:
         loadfile = tkFileDialog.askopenfile(mode='r')
@@ -173,23 +201,29 @@ def showLoadDialog():
 def startCommunication():
     '''
     Testing Py4J connection - will be removed in further versions
+    :return:
     '''
-    global plottingTable
+
     try:
         gateway = JavaGateway(GatewayClient(port=gatewayPort))
         dataStack = gateway.entry_point.getStack()
-        if dataStack.size > 0:
-            plottingTable = dataStack.pop()
-        if dataStack.size() == 0:
-            dataStack.push("czesc jestem GUI")
+        # if dataStack.size > 0:
+        #     plottingTable = dataStack.pop()
+        # if dataStack.size() == 0:
+        #     dataStack.push("czesc jestem GUI")
         tkMessageBox.showinfo("Py4J connection",
-                              "Connection successful! Got data:\n\n %s" % plottingTable)
+                              "Connection successful!")
+        startSimulation(dataStack)
     except (Py4JJavaError, Py4JNetworkError):
         tkMessageBox.showerror("Py4J connection",
                                "Wrong port %s or server does not exist at all!" % gatewayPort)
 
 
-def plotData():
+def testPlotData():
+    '''
+    Just testing plotting library, will be removed
+    :return:
+    '''
     hideBasicGUI()
 
     f.clf()
@@ -201,6 +235,31 @@ def plotData():
 
     dataPlot.show()
     dataPlot.get_tk_widget().place(x=0, y=0, width=winWid * 0.8, height=winHei)
+
+
+def sendParameters(dataStack):
+    '''
+    Sending parameters to core for simulation
+    :param dataStack:
+    :return:
+    '''
+    for k in emasValues.keys():
+        try:
+            dataStack.push(k + "=" + str(emasValues[k]))
+            print k + "=" + str(emasValues[k])
+        except (Py4JJavaError, Py4JNetworkError):
+            tkMessageBox.showerror("Py4J connection",
+                                   "Sending parameters failed")
+
+
+def startSimulation(dataStack):
+    '''
+    Preparing to start simulation and enabling plot update (will be added in future)
+    :param dataStack:
+    :return:
+    '''
+    sendParameters(dataStack)
+    testPlotData()
 
 
 window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())

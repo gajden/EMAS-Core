@@ -11,6 +11,7 @@ import agent.function.SimpleFunction;
 import agent.genotype.FunctionGenotype;
 import agent.genotype.Genotype;
 
+@SuppressWarnings("unused")
 public class FunctionGenotypeTest {
 	private IFunction f;
 	private FunctionGenotype gen;

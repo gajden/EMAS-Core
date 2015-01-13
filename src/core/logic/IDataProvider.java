@@ -4,14 +4,14 @@ import core.settings.AgentSettings;
 import core.settings.EnvironmentSettings;
 import core.settings.SimulationSettings;
 
-import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * Created by Joanna on 2014-11-24.
  */
 public interface IDataProvider {
-    public void initDataProvider(HashMap<String, Float> settings);
+    public void initDataProvider(Map<String, Double> settings);
     public void updateConfigData(String path);
     public EnvironmentSettings getEnvironmentSettings();
     public AgentSettings getAgentsSettings();

@@ -52,4 +52,7 @@ public class AgentSettings {
     public void setDefaultLossFactor() {
         this.energyLossFactor=20;
     }
+    public void setDefaultMinEnergy() {
+        this.minEnergy=0;
+    }
 }

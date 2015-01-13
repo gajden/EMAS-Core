@@ -15,10 +15,18 @@ public class DataProvider implements IDataProvider {
     private AgentSettings agentSettings;
     private EnvironmentSettings environmentSettings;
     private SimulationSettings simulationSettings;
-    private Map<String, Float> settings;
+    private Map<String, Double> settings;
 
+    public DataProvider(){
+    	this.agentSettings = new AgentSettings();
+    	this.environmentSettings = new EnvironmentSettings();
+    	this.simulationSettings = new SimulationSettings();
+    	this.settings = new HashMap<String, Double>();
+    }
+    
+    
     @Override
-    public void initDataProvider(HashMap<String, Float> settings) {
+    public void initDataProvider(Map<String, Double> settings) {
         this.settings = settings;
         this.sortSettings();
     }
@@ -60,6 +68,11 @@ public class DataProvider implements IDataProvider {
             agentSettings.setEnergyLossFactor(settings.get("energyLossFactor"));
         else
             agentSettings.setDefaultLossFactor();
+        
+        if(settings.containsKey("minEnergy"))
+            agentSettings.setMinEnergy(settings.get("minEnergy"));
+        else
+            agentSettings.setDefaultMinEnergy();
 
     }
 

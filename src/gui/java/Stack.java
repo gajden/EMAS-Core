@@ -2,9 +2,11 @@ package gui.java;
 
 import java.util.LinkedList;
 import java.util.List;
+
 /**
- * Created by ant6 on 2014-12-04.
+ * Created by ant6 on 2015-01-02.
  */
+
 public class Stack {
     private List<String> internalList = new LinkedList<String>();
 
@@ -19,9 +21,9 @@ public class Stack {
     public List<String> getInternalList(){
         return internalList;
     }
-    
-    public int size(){    	
-    		return internalList.size();	
+
+    public int size(){
+        return internalList.size();
     }
 
     public void pushAll(List<String> eles){

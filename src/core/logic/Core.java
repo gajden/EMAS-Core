@@ -32,14 +32,14 @@ public class Core implements ICore {
         this.createComponents();
         ready = true;
     }
-
-    private void loadSettings(HashMap<String, Float> settings){
+    /*
+    private void loadSettings(HashMap<String, Double> settings){
         dataProvider.initDataProvider(settings);
     }
-
+*/
     private void createComponents(){
     	this.entryPoint = new StackEntryPoint();
-    	this.gatewayServer=new GatewayServer(this.entryPoint, 25335);
+    	this.gatewayServer=new GatewayServer(this.entryPoint, 25336);
         this.simulation = new Simulation();
         this.dataProvider = new DataProvider();
         this.gatewayServer.start();
@@ -53,7 +53,13 @@ public class Core implements ICore {
     }
     
     public void start(){
-    	
+    	System.out.println("energy on start: " + dataProvider.getAgentsSettings().getEnergyOnStart());
+    	System.out.println("iterations: " + dataProvider.getSimulationSettings().getIterations());
+    	System.out.println("number of islands: " + dataProvider.getEnvironmentSettings().getNumberOfIslands());
+    }
+    
+    public void initProv(Map<String, Double> settings){
+    	this.dataProvider.initDataProvider(settings);
     }
     
     public void setData(String a){
@@ -62,6 +68,17 @@ public class Core implements ICore {
     public List<String> getData(){
     	return stack.getInternalList();
     }
+    
+    public Map<String, Double> parseData(List<String> a){
+    	Map<String, Double> map = new HashMap<String, Double>();
+    	for(String str : a){
+    		String delims = "=";
+    		String[] tokens = str.split(delims);
+    		map.put(tokens[0], Double.parseDouble(tokens[1]));
+    	}
+    	return map;
+    }
+    
     private void distributeData(){
         simulation.init(dataProvider);
     }

@@ -12,6 +12,7 @@ import agent.fitness_evaluator.IFitnessProxy;
 import agent.fitness_evaluator.SimpleFunctionFitnessProxy;
 import agent.function.SimpleFunction;
 
+@SuppressWarnings("unused")
 public class AgentTest {
 	private IFitnessProxy proxy;
 	@Before

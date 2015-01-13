@@ -22,6 +22,7 @@ public class SimpleFunctionFitnessProxy implements IFitnessProxy {
 	private double stepResult(double[][] P){
 		
 		double[] pointWithHighestValue=getPointWithHighestValueFromSimplex(P);
+		@SuppressWarnings("unused")
 		double highestValue=f.getValueAt(pointWithHighestValue);
 		
 		double[] pointWithLowestValue= getPointWithLowestValueFromSimplex(P);

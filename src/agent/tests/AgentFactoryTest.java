@@ -13,6 +13,7 @@ import agent.function.SimpleFunction;
 import agent.agent.Agent;
 import agent.agent.AgentFactory;
 
+@SuppressWarnings("unused")
 public class AgentFactoryTest {
 	private IFitnessProxy proxy;
 	@Before
