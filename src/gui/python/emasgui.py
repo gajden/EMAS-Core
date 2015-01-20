@@ -63,7 +63,7 @@ def spanBasicLabels(wrapper):
     paramIterations.place(x=labelXPos, y=labelYPos + 30)
     hideSet.append(paramIterations)
 
-    basicLabelSett["text"] = "Amount of agents:"
+    basicLabelSett["text"] = "Agents:"
     paramAgents = Label(wrapper, basicLabelSett, bg=None)
     paramAgents.place(x=labelXPos, y=labelYPos + 90)
     hideSet.append(paramAgents)
@@ -78,7 +78,7 @@ def spanBasicLabels(wrapper):
     paramEnergy.place(x=labelXPos, y=labelYPos + 210)
     hideSet.append(paramEnergy)
 
-    basicLabelSett["text"] = "Number Of Islands:"
+    basicLabelSett["text"] = "Islands:"
     paramIslands = Label(wrapper, basicLabelSett, bg=None)
     paramIslands.place(x=labelXPos, y=labelYPos + 270)
     hideSet.append(paramIslands)
