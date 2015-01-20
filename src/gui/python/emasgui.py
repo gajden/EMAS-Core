@@ -23,11 +23,9 @@ gatewayPort = 25336
 
 emasValues = {"numberOfAgents": 10,
               "dimensions": 1,
-              "leftinterval": 0,
-              "rightinterval": 0,
               "iterations": 3,
-              "energyLossFactor" : 10,
-              "numberOfIslands" : 2,
+              "energyLossFactor": 10,
+              "numberOfIslands": 2,
               }
 
 window = Tk()
@@ -37,7 +35,7 @@ winHei = int(window.winfo_screenheight() * 0.8)
 buttonXPos = winWid * 0.75
 labelXPos = buttonXPos  # -100
 labelYPos = winHei * 0.25
-buttonYPos = winHei * 0.7
+buttonYPos = winHei * 0.85
 
 # font for labels etc.
 labelFont = tkFont.Font(family="Georgia", size=14)
@@ -60,10 +58,10 @@ def spanBasicLabels(wrapper):
     paramState.place(x=labelXPos - 40, y=labelYPos - 30)
     hideSet.append(paramState)
 
-    basicLabelSett["text"] = "Simulation duration:"
-    paramDuration = Label(wrapper, basicLabelSett, bg=None)
-    paramDuration.place(x=labelXPos, y=labelYPos + 30)
-    hideSet.append(paramDuration)
+    basicLabelSett["text"] = "Iterations:"
+    paramIterations = Label(wrapper, basicLabelSett, bg=None)
+    paramIterations.place(x=labelXPos, y=labelYPos + 30)
+    hideSet.append(paramIterations)
 
     basicLabelSett["text"] = "Amount of agents:"
     paramAgents = Label(wrapper, basicLabelSett, bg=None)
@@ -75,10 +73,15 @@ def spanBasicLabels(wrapper):
     paramDimensions.place(x=labelXPos, y=labelYPos + 150)
     hideSet.append(paramDimensions)
 
-    basicLabelSett["text"] = "More..."
-    paramMore = Label(wrapper, basicLabelSett, bg=None)
-    paramMore.place(x=labelXPos, y=labelYPos + 210)
-    hideSet.append(paramMore)
+    basicLabelSett["text"] = "Energy Loss Factor:"
+    paramEnergy = Label(wrapper, basicLabelSett, bg=None)
+    paramEnergy.place(x=labelXPos, y=labelYPos + 210)
+    hideSet.append(paramEnergy)
+
+    basicLabelSett["text"] = "Number Of Islands:"
+    paramIslands = Label(wrapper, basicLabelSett, bg=None)
+    paramIslands.place(x=labelXPos, y=labelYPos + 270)
+    hideSet.append(paramIslands)
 
 
 def spanBasicEntries(wrapper):
@@ -88,17 +91,25 @@ def spanBasicEntries(wrapper):
     '''
     basicEntrySett = {"font": labelFont, "width": "9", "justify": LEFT, "state": "normal", "takefocus": "yes"}
 
-    entParamAgents = Entry(wrapper, basicEntrySett)
-    entParamAgents.place(x=labelXPos, y=labelYPos + 60)
-    hideSet.append(entParamAgents)
+    entParamIterations = Entry(wrapper, basicEntrySett)
+    entParamIterations.place(x=labelXPos, y=labelYPos + 60)
+    hideSet.append(entParamIterations)
 
-    entParamDuration = Entry(wrapper, basicEntrySett)
-    entParamDuration.place(x=labelXPos, y=labelYPos + 120)
-    hideSet.append(entParamDuration)
+    entParamAgents = Entry(wrapper, basicEntrySett)
+    entParamAgents.place(x=labelXPos, y=labelYPos + 120)
+    hideSet.append(entParamAgents)
 
     entParamDimensions = Entry(wrapper, basicEntrySett)
     entParamDimensions.place(x=labelXPos, y=labelYPos + 180)
     hideSet.append(entParamDimensions)
+
+    entParamEnergy = Entry(wrapper, basicEntrySett)
+    entParamEnergy.place(x=labelXPos, y=labelYPos + 240)
+    hideSet.append(entParamEnergy)
+
+    entParamIslands = Entry(wrapper, basicEntrySett)
+    entParamIslands.place(x=labelXPos, y=labelYPos + 300)
+    hideSet.append(entParamIslands)
 
 
 def spanBasicButtons(wrapper):
@@ -114,9 +125,9 @@ def spanBasicButtons(wrapper):
     butLoad.place(x=buttonXPos, y=buttonYPos + 30)
     hideSet.append(butLoad)
 
-    butTest = Button(wrapper, text="Test connection", command=startCommunication, width=15)
-    butTest.place(x=buttonXPos, y=buttonYPos + 60)
-    hideSet.append(butTest)
+    # butTest = Button(wrapper, text="Test connection", command=startCommunication, width=15)
+    # butTest.place(x=buttonXPos, y=buttonYPos + 60)
+    # hideSet.append(butTest)
 
 
 def spanBasicGUI(wrapper):
