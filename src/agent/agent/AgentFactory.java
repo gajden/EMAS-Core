@@ -18,9 +18,9 @@ public class AgentFactory implements IAgentFactory {
 		this.genotypeRandomnessFactor = genotypeRandomnessFactor;
 		this.energyOnStart = energyOnStart;
 		this.fitnessEvaluator = fitnessEvaluator;
-		System.out.println("strata en: " + this.energyLossFactor + 
-				", random: " + this.genotypeRandomnessFactor + 
-				", energia startowa: " + this.energyOnStart );
+		//System.out.println("strata en: " + this.energyLossFactor + 
+			//	", random: " + this.genotypeRandomnessFactor + 
+				//", energia startowa: " + this.energyOnStart );
 	}
 
 	

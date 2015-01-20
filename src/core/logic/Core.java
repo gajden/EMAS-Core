@@ -44,7 +44,8 @@ public class Core implements ICore {
         this.dataProvider = new DataProvider();
         this.gatewayServer.start();
         this.stack = this.entryPoint.getStack();
-        System.out.println("Gateway Server Started");
+        System.out.println("Gateway Server Started!");
+        System.out.println("Stos: " + this.stack.size());
 		try {
 			this.p = Runtime.getRuntime().exec("python ./src/gui/python/emasgui.py ");
 		} catch (IOException e1) {
@@ -57,6 +58,8 @@ public class Core implements ICore {
     }
     
     public void initProv(Map<String, Double> settings){
+    	while (!this.stack.ifR()){}
+    	System.out.println("Stos: " + this.stack.size());
     	this.dataProvider.initDataProvider(settings);
     }
     

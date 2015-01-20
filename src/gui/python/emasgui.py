@@ -21,13 +21,13 @@ hideSet = []
 
 gatewayPort = 25336
 
-emasValues = {"numberOfAgents": 2000.9,
+emasValues = {"numberOfAgents": 10,
               "dimensions": 1,
               "leftinterval": 0,
               "rightinterval": 0,
               "iterations": 3,
               "energyLossFactor" : 10,
-              "numberOfIslands" : 18,
+              "numberOfIslands" : 2,
               }
 
 window = Tk()
@@ -139,13 +139,13 @@ def hideBasicGUI():
 
 
 def resetEmasValues():
-    emasValues = {"numberOfAgents": 2000.9,
+    emasValues = {"numberOfAgents": 10,
               "dimensions": 1,
               "leftinterval": 0,
               "rightinterval": 0,
               "iterations": 0,
               "energyLossFactor" : 10,
-              "numberOfIslands" : 18,
+              "numberOfIslands" : 2,
               }
 
 
@@ -246,7 +246,7 @@ def sendParameters(dataStack):
         except (Py4JJavaError, Py4JNetworkError):
             tkMessageBox.showerror("Py4J connection",
                                    "Sending parameters failed")
-
+    
 
 def startSimulation(dataStack):
     '''
@@ -255,6 +255,7 @@ def startSimulation(dataStack):
     :return:
     '''
     sendParameters(dataStack)
+    dataStack.isR()
     testPlotData()
 
 

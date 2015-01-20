@@ -34,7 +34,7 @@ public class Simulation implements ISimulation {
         									dataProvider.getAgentsSettings().getEnergyOnStart(), 
         									asdasd);
         //this.evolution();
-        System.out.println("ile iteracji: " + this.simulationSettings.getIterations() + ", current Iteration: " + this.currentIteration);
+        //System.out.println("ile iteracji: " + this.simulationSettings.getIterations() + ", current Iteration: " + this.currentIteration);
     }
 
     @Override
@@ -50,22 +50,23 @@ public class Simulation implements ISimulation {
     private void setEnvironment(){
         environment = new Environment();
         environment.create(this.environmentSettings);
-        this.fillEnvironment();
+        try {
+			this.fillEnvironment();
+		} catch (WrongGenotypeException e) {
+			e.printStackTrace();
+		}
     }
 
-    private void fillEnvironment(){
+    private void fillEnvironment() throws WrongGenotypeException{
     	for(int i=0; i < environmentSettings.getNumberOfIslands(); i++){
     		environment.chooseIsland(i);
-    		environment.getFirst();
-        	while (environment.hasNext()){
-            	try {
-					environment.setAgent(agentFactory.createAgent());
-				} catch (WrongGenotypeException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            	environment.getNext();
-        	}
+    		//System.out.println("Wybrano wyspe: " + (i+1));    		
+    		for(int j = 0; j < environmentSettings.getNumberOfAgents(); j++){
+    			Agent a = new Agent();
+    			environment.setAgent(a);
+    			//System.out.println("dodano dziada!");
+    		}
+    		System.out.println("Wypelniono wyspe: " + (i+1));
     	}
     }
 
@@ -95,7 +96,6 @@ public class Simulation implements ISimulation {
 
     private void chooseAction(Agent agent, Agent[] neighbours){
         Agent fightCandidate = neighbours[0];
-        int index;
         for(int i = 1; i < neighbours.length; i++){
             if(fightCandidate.getFitness() > neighbours[i].getFitness()){
                 fightCandidate = neighbours[i];
@@ -115,10 +115,6 @@ public class Simulation implements ISimulation {
     }
 
     private void generateStatistics(){
-
-    }
-
-    private void checkWounded(Agent firstAgent, Agent secondAgent){
 
     }
 }

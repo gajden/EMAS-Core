@@ -28,11 +28,11 @@ public class Environment implements IEnvironment {
     	this.currentAgent = 0;//indeks
     	this.islands = new ArrayList<Agent[]>();
     	for (int i = 0; i<this.settings.getNumberOfIslands(); i++){
-    		Agent[] a = new Agent[this.settings.getNumberOfAgents()];
-    		islands.add(a);
+    		islands.add(new Agent[this.settings.getNumberOfAgents()]);
+    		//System.out.println(islands.size());
     	}
-    	System.out.println("ilosc wysp: "+this.settings.getNumberOfIslands() +" ilosc agentow: "+ this.settings.getNumberOfAgents());
-    }
+    	//System.out.println("ilosc wysp: "+this.settings.getNumberOfIslands() +" ilosc agentow: "+ this.settings.getNumberOfAgents());
+   }
 
     @Override
     public void deleteAgent(Agent agent) {
@@ -41,7 +41,6 @@ public class Environment implements IEnvironment {
 
     @Override
     public Agent getFirst() {
-    	this.currentAgent=0;
         return islands.get(currentIsland)[0];
     }
 
@@ -87,7 +86,7 @@ public class Environment implements IEnvironment {
 
     @Override
     public void chooseIsland(int island) {
-    	this.currentIsland = island-1;
+    	this.currentIsland = island;
     }
 
     @Override
