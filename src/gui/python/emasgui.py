@@ -21,11 +21,15 @@ hideSet = []
 
 gatewayPort = 25336
 
-emasValues = {"numberOfAgents": 10,
+emasValues = {"numberOfAgents": 5,
               "dimensions": 1,
-              "iterations": 3,
-              "energyLossFactor": 10,
-              "numberOfIslands": 2,
+              "iterations": 10,
+              "energyLossFactor": 1,
+              "numberOfIslands": 1,
+              "energyOnStart" : 50,
+              "minEnergy" : 1,
+              "genotypeRandomnessFactor" : 0.7,
+              "iterationStat" : 2,
               }
 
 window = Tk()
@@ -150,14 +154,16 @@ def hideBasicGUI():
 
 
 def resetEmasValues():
-    emasValues = {"numberOfAgents": 10,
-              "dimensions": 1,
-              "leftinterval": 0,
-              "rightinterval": 0,
-              "iterations": 0,
-              "energyLossFactor" : 10,
-              "numberOfIslands" : 2,
-              }
+    emasValues = {"numberOfAgents": 5,
+                  "dimensions": 1,
+                  "iterations": 10,
+                  "energyLossFactor": 1,
+                  "numberOfIslands": 1,
+                  "energyOnStart" : 50,
+                  "minEnergy" : 1,
+                  "genotypeRandomnessFactor" : 0.7,
+                  "iterationStat" : 2,
+                  }
 
 
 def parseInputFile(loadfile):

@@ -28,11 +28,12 @@ public class Simulation implements ISimulation {
     	this.simulationSettings = dataProvider.getSimulationSettings();
         this.environmentSettings = dataProvider.getEnvironmentSettings();
         this.currentIteration = 1;
-        this.setEnvironment();        
         this.agentFactory = new AgentFactory(dataProvider.getAgentsSettings().getEnergyLossFactor(), 
-        									dataProvider.getAgentsSettings().getEenotypeRandomnessFactor(), 
-        									dataProvider.getAgentsSettings().getEnergyOnStart(), 
-        									asdasd);
+				dataProvider.getAgentsSettings().getEenotypeRandomnessFactor(), 
+				dataProvider.getAgentsSettings().getEnergyOnStart(), 
+				asdasd);
+        this.setEnvironment();        
+        
         //this.evolution();
         //System.out.println("ile iteracji: " + this.simulationSettings.getIterations() + ", current Iteration: " + this.currentIteration);
     }
@@ -62,19 +63,22 @@ public class Simulation implements ISimulation {
     		environment.chooseIsland(i);
     		//System.out.println("Wybrano wyspe: " + (i+1));    		
     		for(int j = 0; j < environmentSettings.getNumberOfAgents(); j++){
-    			Agent a = new Agent();
-    			environment.setAgent(a);
+    			environment.setAgent(this.agentFactory.createAgent());
+    			//System.out.println(environment.getCurrent().getEnergy());
     			//System.out.println("dodano dziada!");
     		}
-    		System.out.println("Wypelniono wyspe: " + (i+1));
+    		//System.out.println("Wypelniono wyspe: " + (i+1));
     	}
     }
 
     private void evolution(){
-        while (currentIteration < simulationSettings.getIterations()){
+        while (this.currentIteration <= this.simulationSettings.getIterations()){
             this.iterateIslands();
+            if( ( this.currentIteration % this.simulationSettings.getIterationStat() ) == 0)
+            {
+            	this.generateStatistics();
+            }
             ++currentIteration;
-            this.generateStatistics();
         }
         this.inProgress = false;
     }
@@ -83,7 +87,7 @@ public class Simulation implements ISimulation {
         int islands = environment.getNumberOfIslands();
         for (int i = 0; i < islands; ++i){
             environment.chooseIsland(i);
-            this.iterateAgents();
+            //this.iterateAgents(); //wykomentowane bo sie sypie
         }
     }
 
@@ -97,7 +101,7 @@ public class Simulation implements ISimulation {
     private void chooseAction(Agent agent, Agent[] neighbours){
         Agent fightCandidate = neighbours[0];
         for(int i = 1; i < neighbours.length; i++){
-            if(fightCandidate.getFitness() > neighbours[i].getFitness()){
+            if(fightCandidate.getFitness() > neighbours[i].getFitness()){ //tu sie sypie
                 fightCandidate = neighbours[i];
                 
             }
@@ -115,6 +119,6 @@ public class Simulation implements ISimulation {
     }
 
     private void generateStatistics(){
-
+    	System.out.println("Generuje jakies tam statystyki jeszcze nie wiem jakie.");
     }
 }

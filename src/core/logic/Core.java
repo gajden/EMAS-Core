@@ -4,6 +4,7 @@ import agent.agent.Agent;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import py4j.GatewayServer;
@@ -31,6 +32,7 @@ public class Core implements ICore {
     public void init() {
         this.createComponents();
         ready = true;
+        while (!this.stack.ifR()){}
     }
     /*
     private void loadSettings(HashMap<String, Double> settings){
@@ -45,7 +47,7 @@ public class Core implements ICore {
         this.gatewayServer.start();
         this.stack = this.entryPoint.getStack();
         System.out.println("Gateway Server Started!");
-        System.out.println("Stos: " + this.stack.size());
+        //System.out.println("Stos: " + this.stack.size());
 		try {
 			this.p = Runtime.getRuntime().exec("python ./src/gui/python/emasgui.py ");
 		} catch (IOException e1) {
@@ -55,11 +57,10 @@ public class Core implements ICore {
     
     public void start(){
     	this.distributeData();
+    	this.simulation.start();
     }
     
     public void initProv(Map<String, Double> settings){
-    	while (!this.stack.ifR()){}
-    	System.out.println("Stos: " + this.stack.size());
     	this.dataProvider.initDataProvider(settings);
     }
     
@@ -67,10 +68,16 @@ public class Core implements ICore {
     	stack.push(a);
     }
     public List<String> getData(){
-    	return stack.getInternalList();
+    	//System.out.println("Stos: " + this.stack.size());
+    	List<String> lista = new LinkedList<String>();
+    	while(this.stack.size() > 0)
+    		lista.add(this.stack.pop());
+    	//System.out.println("Stos: " + this.stack.size());
+    	return lista;
     }
     
     public Map<String, Double> parseData(List<String> a){
+    	//System.out.println(a);
     	Map<String, Double> map = new HashMap<String, Double>();
     	for(String str : a){
     		String delims = "=";

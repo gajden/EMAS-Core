@@ -10,7 +10,7 @@ import java.util.List;
 public class Stack {
     private List<String> internalList;
     private boolean r = false;
-    private final int ILOSC_PARAM = 7;
+    private final int ILOSC_PARAM = 9;
 
     public void isR(){
     	while(this.internalList.size()<ILOSC_PARAM){}
