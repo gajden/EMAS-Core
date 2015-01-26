@@ -15,36 +15,44 @@ import agent.function.SimpleFunction;
 @SuppressWarnings("unused")
 public class AgentTest {
 	private IFitnessProxy proxy;
+
 	@Before
 	public void setUp() throws Exception {
 		proxy = new SimpleFunctionFitnessProxy(new SimpleFunction());
 	}
 
 	@Test
-	public void fightTest() throws WrongGenotypeException {
-		Agent a1 = new Agent(50, 0.2, 100, proxy);
-		Agent a2 = new Agent(50, 0.2, 100, proxy);
-		
-		a1.setFitness(0);
-		a2.setFitness(1);
-		
-		a1.fight(a2);
-		
-		assert(a1.getFitness()==50 && a2.getFitness()==150);
+	public void fightTest() {
+		try {
+			Agent a1;
+			a1 = new Agent(50, 0.2, 100, proxy);
+			Agent a2;
+			a2 = new Agent(50, 0.2, 100, proxy);
+			a1.setFitness(0);
+			a2.setFitness(1);
+			a1.fight(a2);
+			assertEquals(a1.getEnergy(), 50, 0.0);
+			assertEquals(a2.getEnergy(), 150, 0.0);
+		} catch (WrongGenotypeException e) {
+			e.printStackTrace();
+		}
 	}
 
-	
 	@Test
-	public void hybridizeZeroRandomnessFactorTest() throws WrongGenotypeException {
+	public void hybridizeZeroRandomnessFactorTest()
+			throws WrongGenotypeException {
 		Agent a1 = new Agent(50, 0.2, 100, proxy);
 		Agent a2 = new Agent(50, 0.2, 100, proxy);
-		
+
 		a1.setFitness(0);
 		a2.setFitness(1);
-		
+
 		Agent a3 = a1.hybridize(a2);
-		assert(a1.getEnergy()==50 && a2.getEnergy()==50 && a3.getEnergy()==100 && a3.getFitness()==(a1.getFitness()+a2.getFitness())/2);
+
+		assertEquals(a1.getEnergy(), 50, 0.0);
+		assertEquals(a2.getEnergy(), 50, 0.0);
+		assertEquals(a3.getEnergy(), 100, 0.0);
+
 	}
-	
-	
+
 }
