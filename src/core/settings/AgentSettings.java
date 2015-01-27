@@ -8,7 +8,15 @@ public class AgentSettings {
     private double energyLossFactor;
     private double genotypeRandomnessFactor;
     private int dim;
-       
+    private double crossingMinEnergy;
+
+
+    public double getCrossingMinEnergy(){
+        return crossingMinEnergy;
+    }
+    public void setCrossingMinEnergy(double minEnergy){
+        this.crossingMinEnergy = minEnergy;
+    }
     
     public double getMinEnergy(){
         return this.minEnergy;

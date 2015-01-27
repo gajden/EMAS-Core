@@ -134,4 +134,8 @@ public class Environment implements IEnvironment {
     public float getWorst() {
         return 0;
     }
+
+    public void tryPut(Agent agent){
+
+    }
 }

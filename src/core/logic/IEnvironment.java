@@ -32,4 +32,5 @@ public interface IEnvironment {
     public Agent getBest();
     public float getAverage();
     public float getWorst();
+    public void tryPut(Agent agent);
 }

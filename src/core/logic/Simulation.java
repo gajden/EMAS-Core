@@ -99,22 +99,35 @@ public class Simulation implements ISimulation {
     }
 
     private void chooseAction(Agent agent, Agent[] neighbours){
-        Agent fightCandidate = neighbours[0];
-        for(int i = 1; i < neighbours.length; i++){
-            if(fightCandidate.getFitness() > neighbours[i].getFitness()){ //tu sie sypie
-                fightCandidate = neighbours[i];
-                
+        if (agent != null){
+
+            if(neighbours.length > 1){
+                if(!tryCrossing(agent, neighbours[0]))
+                    if(!tryCrossing(agent, neighbours[1]))
+                        agent.fight(neighbours[0]);
+
+            }else if (neighbours.length == 1){
+                if(neighbours[0] != null)
+                    if(!tryCrossing(agent, neighbours[0])){
+                        agent.fight(neighbours[0]);
+                    }
             }
         }
-        agent.fight(fightCandidate);
 
-        if(environment.getCurrent().getEnergy() < agentSettings.getMinEnergy())
+        checkForDead(agent, neighbours);
+    }
+
+    private boolean tryCrossing(Agent agent1, Agent agent2){
+        if(agent1.getEnergy() >= agentSettings.getCrossingMinEnergy() && agent2.getEnergy() >= agentSettings.getCrossingMinEnergy()){
             try {
-                environment.setAgent(agentFactory.createAgent());
-            }catch (Exception e){ }
-        else if(fightCandidate.getEnergy() <  agentSettings.getMinEnergy()){
+                environment.tryPut(agent1.hybridize(agent2));
+            }catch (Exception e){}
+            return true;
+        } else
+            return false;
+    }
 
-        }
+    private void checkForDead(Agent agent, Agent[] agents){
 
     }
 
