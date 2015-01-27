@@ -29,12 +29,10 @@ public interface IEnvironment {
     public Agent getCurrent();
     public void setAgent(Agent agent);
     public boolean hasNext();
-<<<<<<< HEAD
     public Agent getBest();
     public float getAverage();
     public float getWorst();
     public void tryPut(Agent agent);
-=======
 	void resetCurrent();
->>>>>>> origin/collaboration
+
 }

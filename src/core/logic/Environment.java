@@ -118,6 +118,21 @@ public class Environment implements IEnvironment {
     }
 
     @Override
+    public Agent getBest() {
+        return null;
+    }
+
+    @Override
+    public float getAverage() {
+        return 0;
+    }
+
+    @Override
+    public float getWorst() {
+        return 0;
+    }
+
+    @Override
     public void setAgent(Agent agent) {
     	this.islands.get(currentIsland)[currentAgent] = agent;
     	currentAgent++;
