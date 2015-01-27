@@ -21,15 +21,15 @@ hideSet = []
 
 gatewayPort = 25336
 
-emasValues = {"numberOfAgents": 5,
+emasValues = {"numberOfAgents": 50,
               "dimensions": 1,
-              "iterations": 10,
+              "iterations": 1000,
               "energyLossFactor": 1,
-              "numberOfIslands": 1,
+              "numberOfIslands": 2,
               "energyOnStart" : 50,
               "minEnergy" : 1,
               "genotypeRandomnessFactor" : 0.7,
-              "iterationStat" : 2,
+              "iterationStat" : 10,
               }
 
 window = Tk()
@@ -38,7 +38,7 @@ winHei = int(window.winfo_screenheight() * 0.8)
 
 buttonXPos = winWid * 0.75
 labelXPos = buttonXPos  # -100
-labelYPos = winHei * 0.25
+labelYPos = -20
 buttonYPos = winHei * 0.85
 
 # font for labels etc.
@@ -56,11 +56,6 @@ def spanBasicLabels(wrapper):
     :return:
     '''
     basicLabelSett = {"font": labelFont, "width": 30, "anchor": W, "wraplength": "500"}
-
-    basicLabelSett["text"] = "Waiting to start simulation..."
-    paramState = Label(wrapper, basicLabelSett, bg=None)
-    paramState.place(x=labelXPos - 40, y=labelYPos - 30)
-    hideSet.append(paramState)
 
     basicLabelSett["text"] = "Iterations:"
     paramIterations = Label(wrapper, basicLabelSett, bg=None)
@@ -86,6 +81,26 @@ def spanBasicLabels(wrapper):
     paramIslands = Label(wrapper, basicLabelSett, bg=None)
     paramIslands.place(x=labelXPos, y=labelYPos + 270)
     hideSet.append(paramIslands)
+
+    basicLabelSett["text"] = "Starting Energy:"
+    paramStartEnergy = Label(wrapper, basicLabelSett, bg=None)
+    paramStartEnergy.place(x=labelXPos, y=labelYPos + 330)
+    hideSet.append(paramStartEnergy)
+
+    basicLabelSett["text"] = "Minimal Energy:"
+    paramMinEnergy= Label(wrapper, basicLabelSett, bg=None)
+    paramMinEnergy.place(x=labelXPos, y=labelYPos + 390)
+    hideSet.append(paramMinEnergy)
+
+    basicLabelSett["text"] = "Genotype Factor:"
+    paramGenotype= Label(wrapper, basicLabelSett, bg=None)
+    paramGenotype.place(x=labelXPos, y=labelYPos + 450)
+    hideSet.append(paramGenotype)
+
+    basicLabelSett["text"] = "Statistics Density:"
+    paramStats= Label(wrapper, basicLabelSett, bg=None)
+    paramStats.place(x=labelXPos, y=labelYPos + 450)
+    hideSet.append(paramStats)
 
 
 def spanBasicEntries(wrapper):
@@ -114,6 +129,22 @@ def spanBasicEntries(wrapper):
     entParamIslands = Entry(wrapper, basicEntrySett)
     entParamIslands.place(x=labelXPos, y=labelYPos + 300)
     hideSet.append(entParamIslands)
+
+    entParamStartEnergy = Entry(wrapper, basicEntrySett)
+    entParamStartEnergy.place(x=labelXPos, y=labelYPos + 360)
+    hideSet.append(entParamStartEnergy)
+
+    entParamMinEnergy = Entry(wrapper, basicEntrySett)
+    entParamMinEnergy.place(x=labelXPos, y=labelYPos + 420)
+    hideSet.append(entParamMinEnergy)
+
+    entParamGenotype = Entry(wrapper, basicEntrySett)
+    entParamGenotype.place(x=labelXPos, y=labelYPos + 480)
+    hideSet.append(entParamGenotype)
+
+    entParamStats = Entry(wrapper, basicEntrySett)
+    entParamStats.place(x=labelXPos, y=labelYPos + 540)
+    hideSet.append(entParamStats)
 
 
 def spanBasicButtons(wrapper):
@@ -151,20 +182,6 @@ def hideBasicGUI():
     '''
     for e in hideSet:
         e.destroy()
-
-
-def resetEmasValues():
-    emasValues = {"numberOfAgents": 5,
-                  "dimensions": 1,
-                  "iterations": 10,
-                  "energyLossFactor": 1,
-                  "numberOfIslands": 1,
-                  "energyOnStart" : 50,
-                  "minEnergy" : 1,
-                  "genotypeRandomnessFactor" : 0.7,
-                  "iterationStat" : 2,
-                  }
-
 
 def parseInputFile(loadfile):
     '''

@@ -12,6 +12,7 @@ import agent.agent.AgentFactory;
 import agent.exceptions.WrongGenotypeException;
 import agent.fitness_evaluator.SimpleFunctionFitnessProxy;
 import agent.function.SimpleFunction;
+import sun.management.resources.agent;
 
 /**
  * Created by Joanna on 2014-11-25.
@@ -70,7 +71,7 @@ public class Simulation implements ISimulation {
     	for(int i=0; i < environmentSettings.getNumberOfIslands(); i++){
     		environment.chooseIsland(i);    		
     		for(int j = 0; j < environmentSettings.getNumberOfAgents(); j++){
-    			environment.setAgent(this.agentFactory.createAgent());
+    			environment.tryPut(this.agentFactory.createAgent());
     		}
     		environment.resetCurrent();
     	}
@@ -103,58 +104,35 @@ public class Simulation implements ISimulation {
         }
     }
 
-<<<<<<< HEAD
-    private void chooseAction(Agent agent, Agent[] neighbours){
-        if (agent != null){
 
-            if(neighbours.length > 1){
-                if(!tryCrossing(agent, neighbours[0]))
-                    if(!tryCrossing(agent, neighbours[1]))
-                        agent.fight(neighbours[0]);
+    private void chooseAction(Agent agent, LinkedList<Agent> list) {
+        if(agent != null){
 
-            }else if (neighbours.length == 1){
-                if(neighbours[0] != null)
-                    if(!tryCrossing(agent, neighbours[0])){
-                        agent.fight(neighbours[0]);
-                    }
+            if(list.size() == 1){
+                if(!tryCrossing(agent, list.getFirst()))
+                    agent.fight(list.getFirst());
+            }else if(list.size() == 2){
+                if(!tryCrossing(agent, list.getFirst()))
+                    if(!tryCrossing(agent, list.get(1)))
+                        agent.fight(list.getFirst());
             }
+
         }
 
-        checkForDead(agent, neighbours);
+        this.checkForDead(agent, list);
     }
 
     private boolean tryCrossing(Agent agent1, Agent agent2){
-        if(agent1.getEnergy() >= agentSettings.getCrossingMinEnergy() && agent2.getEnergy() >= agentSettings.getCrossingMinEnergy()){
-=======
-    private void chooseAction(Agent agent, LinkedList<Agent> linkedList){
-        Agent fightCandidate = linkedList.getFirst();
-        for(Agent ag : linkedList){
-        	fightCandidate = ag;
-            if(fightCandidate.getFitness() > ag.getFitness()){
-                fightCandidate = ag;
-            }
-        }
-        agent.fight(fightCandidate);
-        if(agent.getFitness() < this.bestFitness) this.bestFitness=agent.getFitness();
-        if(fightCandidate.getFitness() < this.bestFitness) this.bestFitness=fightCandidate.getFitness();
-        
-        if(environment.getCurrent().getEnergy() < agentSettings.getMinEnergy())
->>>>>>> origin/collaboration
+        if(agent1.getEnergy() >= agentSettings.getCrossingMinEnergy() && agent2.getEnergy() >= agentSettings.getCrossingMinEnergy())
             try {
                 environment.tryPut(agent1.hybridize(agent2));
-            }catch (Exception e){}
-            return true;
-        } else
-            return false;
+            } catch(Exception e) {}
+        return false;
     }
 
-<<<<<<< HEAD
-    private void checkForDead(Agent agent, Agent[] agents){
 
-=======
-        }
->>>>>>> origin/collaboration
-    }
+    private void checkForDead(Agent agent, LinkedList<Agent> agents){}
+
 
     private void generateStatistics(){
    		this.stack.push("iteracja="+this.currentIteration + ",bestFitness=" + this.bestFitness);
