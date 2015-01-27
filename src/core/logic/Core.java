@@ -34,20 +34,15 @@ public class Core implements ICore {
         ready = true;
         while (!this.stack.ifR()){}
     }
-    /*
-    private void loadSettings(HashMap<String, Double> settings){
-        dataProvider.initDataProvider(settings);
-    }
-*/
+
     private void createComponents(){
     	this.entryPoint = new StackEntryPoint();
     	this.gatewayServer=new GatewayServer(this.entryPoint, 25336);
-        this.simulation = new Simulation();
         this.dataProvider = new DataProvider();
         this.gatewayServer.start();
         this.stack = this.entryPoint.getStack();
         System.out.println("Gateway Server Started!");
-        //System.out.println("Stos: " + this.stack.size());
+        this.simulation = new Simulation(this.stack);
 		try {
 			this.p = Runtime.getRuntime().exec("python ./src/gui/python/emasgui.py ");
 		} catch (IOException e1) {
@@ -68,16 +63,13 @@ public class Core implements ICore {
     	stack.push(a);
     }
     public List<String> getData(){
-    	//System.out.println("Stos: " + this.stack.size());
     	List<String> lista = new LinkedList<String>();
     	while(this.stack.size() > 0)
     		lista.add(this.stack.pop());
-    	//System.out.println("Stos: " + this.stack.size());
     	return lista;
     }
     
     public Map<String, Double> parseData(List<String> a){
-    	//System.out.println(a);
     	Map<String, Double> map = new HashMap<String, Double>();
     	for(String str : a){
     		String delims = "=";
@@ -95,4 +87,10 @@ public class Core implements ICore {
     	this.gatewayServer.shutdown();
     	System.out.println("Gateway Server & GUI Shutdown");
     }
+    
+	public void printStackforTests() {
+		for(String a : this.stack.getInternalList()){
+			System.out.println(a);
+		}
+	}
 }

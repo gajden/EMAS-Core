@@ -15,12 +15,12 @@ import agent.agent.Agent;
  */
 @SuppressWarnings("unused")
 public class Environment implements IEnvironment {
+	
     private ArrayList<Agent[]> islands;
     private int currentIsland;
     private int currentAgent;
     private EnvironmentSettings settings;
-
-
+    
     @Override
     public void create(EnvironmentSettings settings) {
     	this.settings = settings;
@@ -29,9 +29,7 @@ public class Environment implements IEnvironment {
     	this.islands = new ArrayList<Agent[]>();
     	for (int i = 0; i<this.settings.getNumberOfIslands(); i++){
     		islands.add(new Agent[this.settings.getNumberOfAgents()]);
-    		//System.out.println(islands.size());
     	}
-    	//System.out.println("ilosc wysp: "+this.settings.getNumberOfIslands() +" ilosc agentow: "+ this.settings.getNumberOfAgents());
    }
 
     @Override
@@ -41,6 +39,7 @@ public class Environment implements IEnvironment {
 
     @Override
     public Agent getFirst() {
+    	this.currentAgent=0;
         return islands.get(currentIsland)[0];
     }
 
@@ -67,10 +66,14 @@ public class Environment implements IEnvironment {
     }
 
     @Override
-    public Agent[] getNeighbours() {
-    	Agent[] n = new Agent[2];
-    	n[0] = this.getPrev();
-    	n[1] = this.getNext();
+    public LinkedList<Agent> getNeighbours() {
+    	LinkedList<Agent> n = new LinkedList<Agent>();
+    	Agent a = this.getPrev();
+    	if(a != null )
+    		n.add(a);
+    	a = this.getNext();
+    	if(a != null)
+    	   	n.add(a);
     	return n;
     }
 
@@ -95,44 +98,29 @@ public class Environment implements IEnvironment {
     }
 
     @Override
-    public int find(Agent agent) {
-    	
-        return 0;
-    }
-
-    @Override
     public Agent getAgent(int position) {
         return islands.get(currentIsland)[position];
     }
 
     @Override
+    
+    public void resetCurrent(){
+    	this.currentAgent = 0;
+    }
+    
     public Agent getCurrent() {
         return islands.get(currentIsland)[currentAgent];
     }
 
     @Override
     public boolean hasNext() {
-        return this.currentAgent < settings.getNumberOfAgents()-1;
+        return this.currentAgent+1 < settings.getNumberOfAgents();
     }
 
     @Override
     public void setAgent(Agent agent) {
     	this.islands.get(currentIsland)[currentAgent] = agent;
-    }
-
-    @Override
-    public Agent getBest(){
-        return null;
-    }
-
-    @Override
-    public float getAverage() {
-        return 0;
-    }
-
-    @Override
-    public float getWorst() {
-        return 0;
+    	currentAgent++;
     }
 
     public void tryPut(Agent agent){

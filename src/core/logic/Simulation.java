@@ -1,5 +1,9 @@
 package core.logic;
 
+import gui.java.Stack;
+
+import java.util.LinkedList;
+
 import core.settings.AgentSettings;
 import core.settings.EnvironmentSettings;
 import core.settings.SimulationSettings;
@@ -13,6 +17,8 @@ import agent.function.SimpleFunction;
  * Created by Joanna on 2014-11-25.
  */
 public class Simulation implements ISimulation {
+	double inf = Double.POSITIVE_INFINITY;
+	private double bestFitness = inf;
     private Environment environment;
     private EnvironmentSettings environmentSettings;
     private boolean inProgress = false;
@@ -20,7 +26,11 @@ public class Simulation implements ISimulation {
     private int currentIteration;
     private AgentFactory agentFactory;
     private AgentSettings agentSettings;
-
+    private Stack stack;
+    
+    public Simulation(Stack s){
+    	this.stack=s;
+    }
 
     @Override
     public void init(DataProvider dataProvider) {
@@ -28,14 +38,12 @@ public class Simulation implements ISimulation {
     	this.simulationSettings = dataProvider.getSimulationSettings();
         this.environmentSettings = dataProvider.getEnvironmentSettings();
         this.currentIteration = 1;
+        this.agentSettings = dataProvider.getAgentsSettings();
         this.agentFactory = new AgentFactory(dataProvider.getAgentsSettings().getEnergyLossFactor(), 
 				dataProvider.getAgentsSettings().getEenotypeRandomnessFactor(), 
 				dataProvider.getAgentsSettings().getEnergyOnStart(), 
 				asdasd);
-        this.setEnvironment();        
-        
-        //this.evolution();
-        //System.out.println("ile iteracji: " + this.simulationSettings.getIterations() + ", current Iteration: " + this.currentIteration);
+        this.setEnvironment();
     }
 
     @Override
@@ -60,14 +68,11 @@ public class Simulation implements ISimulation {
 
     private void fillEnvironment() throws WrongGenotypeException{
     	for(int i=0; i < environmentSettings.getNumberOfIslands(); i++){
-    		environment.chooseIsland(i);
-    		//System.out.println("Wybrano wyspe: " + (i+1));    		
+    		environment.chooseIsland(i);    		
     		for(int j = 0; j < environmentSettings.getNumberOfAgents(); j++){
     			environment.setAgent(this.agentFactory.createAgent());
-    			//System.out.println(environment.getCurrent().getEnergy());
-    			//System.out.println("dodano dziada!");
     		}
-    		//System.out.println("Wypelniono wyspe: " + (i+1));
+    		environment.resetCurrent();
     	}
     }
 
@@ -87,7 +92,7 @@ public class Simulation implements ISimulation {
         int islands = environment.getNumberOfIslands();
         for (int i = 0; i < islands; ++i){
             environment.chooseIsland(i);
-            //this.iterateAgents(); //wykomentowane bo sie sypie
+            this.iterateAgents();
         }
     }
 
@@ -98,6 +103,7 @@ public class Simulation implements ISimulation {
         }
     }
 
+<<<<<<< HEAD
     private void chooseAction(Agent agent, Agent[] neighbours){
         if (agent != null){
 
@@ -119,6 +125,21 @@ public class Simulation implements ISimulation {
 
     private boolean tryCrossing(Agent agent1, Agent agent2){
         if(agent1.getEnergy() >= agentSettings.getCrossingMinEnergy() && agent2.getEnergy() >= agentSettings.getCrossingMinEnergy()){
+=======
+    private void chooseAction(Agent agent, LinkedList<Agent> linkedList){
+        Agent fightCandidate = linkedList.getFirst();
+        for(Agent ag : linkedList){
+        	fightCandidate = ag;
+            if(fightCandidate.getFitness() > ag.getFitness()){
+                fightCandidate = ag;
+            }
+        }
+        agent.fight(fightCandidate);
+        if(agent.getFitness() < this.bestFitness) this.bestFitness=agent.getFitness();
+        if(fightCandidate.getFitness() < this.bestFitness) this.bestFitness=fightCandidate.getFitness();
+        
+        if(environment.getCurrent().getEnergy() < agentSettings.getMinEnergy())
+>>>>>>> origin/collaboration
             try {
                 environment.tryPut(agent1.hybridize(agent2));
             }catch (Exception e){}
@@ -127,11 +148,15 @@ public class Simulation implements ISimulation {
             return false;
     }
 
+<<<<<<< HEAD
     private void checkForDead(Agent agent, Agent[] agents){
 
+=======
+        }
+>>>>>>> origin/collaboration
     }
 
     private void generateStatistics(){
-    	System.out.println("Generuje jakies tam statystyki jeszcze nie wiem jakie.");
+   		this.stack.push("iteracja="+this.currentIteration + ",bestFitness=" + this.bestFitness);
     }
 }

@@ -36,11 +36,15 @@
       <file leaf-file-name="Simulation.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/logic/Simulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="2244">
-              <caret line="126" column="12" selection-start-line="126" selection-start-column="12" selection-end-line="126" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2164" max-vertical-offset="2856">
+              <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
               <folding>
-                <element signature="e#4435#4436#0" expanded="true" />
-                <element signature="e#4524#4525#0" expanded="true" />
+                <element signature="e#1668#1669#0" expanded="false" />
+                <element signature="e#1700#1701#0" expanded="false" />
+                <element signature="e#1750#1751#0" expanded="false" />
+                <element signature="e#1783#1784#0" expanded="false" />
+                <element signature="e#5050#5051#0" expanded="true" />
+                <element signature="e#5150#5151#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,9 +53,13 @@
       <file leaf-file-name="Environment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/logic/Environment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.300752" vertical-offset="0" max-vertical-offset="1955">
-              <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
-              <folding />
+            <state vertical-scroll-proportion="-1.3007519" vertical-offset="1522" max-vertical-offset="1921">
+              <caret line="69" column="5" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="4" />
+              <folding>
+                <element signature="e#1653#1660#0" expanded="true" />
+                <element signature="e#2258#2259#0" expanded="true" />
+                <element signature="e#2317#2318#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -59,8 +67,8 @@
       <file leaf-file-name="IEnvironment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/logic/IEnvironment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="230" max-vertical-offset="646">
-              <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="332" max-vertical-offset="748">
+              <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -555,12 +563,12 @@
       <changelist id="1e307c50-013a-423e-b11b-93b62e9c88fb" name="Default" comment="" />
       <created>1422361077801</created>
       <updated>1422361077801</updated>
-      <workItem from="1422361084999" duration="3812000" />
+      <workItem from="1422361084999" duration="4191000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3812000" />
+    <option name="totallyTimeSpent" value="4191000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -699,28 +707,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/logic/Simulation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="2244">
-          <caret line="126" column="12" selection-start-line="126" selection-start-column="12" selection-end-line="126" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2164" max-vertical-offset="2856">
+          <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
           <folding>
-            <element signature="e#4435#4436#0" expanded="true" />
-            <element signature="e#4524#4525#0" expanded="true" />
+            <element signature="e#1668#1669#0" expanded="false" />
+            <element signature="e#1700#1701#0" expanded="false" />
+            <element signature="e#1750#1751#0" expanded="false" />
+            <element signature="e#1783#1784#0" expanded="false" />
+            <element signature="e#5050#5051#0" expanded="true" />
+            <element signature="e#5150#5151#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/logic/IEnvironment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="230" max-vertical-offset="646">
-          <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="332" max-vertical-offset="748">
+          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/logic/Environment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.300752" vertical-offset="0" max-vertical-offset="1955">
-          <caret line="66" column="5" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
-          <folding />
+        <state vertical-scroll-proportion="-1.3007519" vertical-offset="1522" max-vertical-offset="1921">
+          <caret line="69" column="5" selection-start-line="69" selection-start-column="4" selection-end-line="69" selection-end-column="4" />
+          <folding>
+            <element signature="e#1653#1660#0" expanded="true" />
+            <element signature="e#2258#2259#0" expanded="true" />
+            <element signature="e#2317#2318#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

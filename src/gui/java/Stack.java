@@ -2,13 +2,14 @@ package gui.java;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by ant6 on 2015-01-02.
  */
 
 public class Stack {
-    private List<String> internalList;
+    private Queue<String> internalList;
     private boolean r = false;
     private final int ILOSC_PARAM = 9;
 
@@ -26,14 +27,14 @@ public class Stack {
     }
     
     public void push(String ele){
-        internalList.add(ele);
+        internalList.offer(ele);
     }
 
     public String pop(){
-        return internalList.remove(0);
+        return internalList.poll();
     }
 
-    public List<String> getInternalList(){
+    public Queue<String> getInternalList(){
         return internalList;
     }
 
