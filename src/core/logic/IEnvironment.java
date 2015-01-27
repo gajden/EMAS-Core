@@ -2,6 +2,7 @@ package core.logic;
 
 import core.settings.EnvironmentSettings;
 
+import java.util.LinkedList;
 import java.util.Map;
 
 import agent.agent.Agent;
@@ -19,17 +20,14 @@ public interface IEnvironment {
     public Agent getLast();
     public Agent getNext();
     public Agent getPrev();
-    public Agent[] getNeighbours();
+    public LinkedList<Agent> getNeighbours();
     public int getNumberOfIslands();
     public int getNumberOfAgents();
     public void chooseIsland(int island);
     public void swap(Agent firstAgent, Agent secondAgent);
-    public int find(Agent agent);
     public Agent getAgent(int position);
     public Agent getCurrent();
     public void setAgent(Agent agent);
     public boolean hasNext();
-    public Agent getBest();
-    public float getAverage();
-    public float getWorst();
+	void resetCurrent();
 }

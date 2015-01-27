@@ -1,7 +1,8 @@
 package core.logic;
 
-/*TODO:
-->Simulation.iterateAgents(), sypie sie w chooseAction()
+/**TODO:
+*->Simulation.iterateAgents(), sypie sie w chooseAction()
+*
 */
 
 import java.util.Map;
@@ -17,6 +18,7 @@ public class App {
         System.out.println("Dane z GUI: " + map);
         core.initProv(map);
         core.start();
+        core.printStackforTests();
         core.clean();
     }
 }
