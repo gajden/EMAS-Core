@@ -98,10 +98,5 @@ public class DataProvider implements IDataProvider {
             simulationSettings.setIterations(settings.get("iterations").intValue());
         else
             simulationSettings.setDefaultIterations();
-        
-        if(settings.containsKey("iterationStat"))
-            simulationSettings.setIterationStat(settings.get("iterationStat").intValue());
-        else
-            simulationSettings.setDefaultIterationStat();
     }
 }
