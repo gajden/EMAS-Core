@@ -2,7 +2,6 @@ package core.logic;
 
 /**TODO:
 *->Simulation.iterateAgents(), sypie sie w chooseAction()
-*
 */
 
 import java.util.Map;

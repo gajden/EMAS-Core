@@ -9,17 +9,17 @@ import java.util.Queue;
  */
 
 public class Stack {
-    private Queue<String> internalList;
-    private boolean r = false;
+    private List<String> internalList;
+    private int r = 0;
     private final int ILOSC_PARAM = 9;
 
     public void isR(){
     	while(this.internalList.size()<ILOSC_PARAM){}
-    	this.r=true;
+    	this.r=1;
     }
     
     public boolean ifR(){
-    	return r;
+    	return (r == 1);
     }
     
     public Stack(){
@@ -27,14 +27,14 @@ public class Stack {
     }
     
     public void push(String ele){
-        internalList.offer(ele);
+        internalList.add(ele);
     }
 
     public String pop(){
-        return internalList.poll();
+        return internalList.remove(0);
     }
 
-    public Queue<String> getInternalList(){
+    public List<String> getInternalList(){
         return internalList;
     }
 
@@ -46,5 +46,13 @@ public class Stack {
         for(String ele : eles){
             this.push(ele);
         }
+    }
+    
+    public void rForGui(){
+    	this.r=2;
+    }
+    
+    public boolean gui(){
+    	return this.r==2;
     }
 }

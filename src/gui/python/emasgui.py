@@ -1,3 +1,5 @@
+import time
+
 __author__ = 'ant6'
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
@@ -26,10 +28,10 @@ emasValues = {"numberOfAgents": 50,
               "iterations": 1000,
               "energyLossFactor": 1,
               "numberOfIslands": 2,
-              "energyOnStart" : 50,
-              "minEnergy" : 1,
-              "genotypeRandomnessFactor" : 0.7,
-              "iterationStat" : 10,
+              "energyOnStart": 50,
+              "minEnergy": 1,
+              "genotypeRandomnessFactor": 0.7,
+              "iterationStat": 10,
               }
 
 window = Tk()
@@ -48,7 +50,7 @@ labelFont = tkFont.Font(family="Georgia", size=14)
 f = Figure(dpi=100)
 plota = f.add_subplot(111)
 dataPlot = FigureCanvasTkAgg(f, master=window)
-
+dataPoints = []
 
 def spanBasicLabels(wrapper):
     '''
@@ -99,7 +101,7 @@ def spanBasicLabels(wrapper):
 
     basicLabelSett["text"] = "Statistics Density:"
     paramStats= Label(wrapper, basicLabelSett, bg=None)
-    paramStats.place(x=labelXPos, y=labelYPos + 450)
+    paramStats.place(x=labelXPos, y=labelYPos + 510)
     hideSet.append(paramStats)
 
 
@@ -109,6 +111,8 @@ def spanBasicEntries(wrapper):
     :return:
     '''
     basicEntrySett = {"font": labelFont, "width": "9", "justify": LEFT, "state": "normal", "takefocus": "yes"}
+    global entParamIterations, entParamAgents, entParamDimensions, entParamLossEnergy, entParamMinEnergy
+    global entParamIslands, entParamStats, entParamStartEnergy, entParamGenotype
 
     entParamIterations = Entry(wrapper, basicEntrySett)
     entParamIterations.place(x=labelXPos, y=labelYPos + 60)
@@ -122,9 +126,9 @@ def spanBasicEntries(wrapper):
     entParamDimensions.place(x=labelXPos, y=labelYPos + 180)
     hideSet.append(entParamDimensions)
 
-    entParamEnergy = Entry(wrapper, basicEntrySett)
-    entParamEnergy.place(x=labelXPos, y=labelYPos + 240)
-    hideSet.append(entParamEnergy)
+    entParamLossEnergy = Entry(wrapper, basicEntrySett)
+    entParamLossEnergy.place(x=labelXPos, y=labelYPos + 240)
+    hideSet.append(entParamLossEnergy)
 
     entParamIslands = Entry(wrapper, basicEntrySett)
     entParamIslands.place(x=labelXPos, y=labelYPos + 300)
@@ -153,11 +157,11 @@ def spanBasicButtons(wrapper):
     :return:
     '''
     butStart = Button(wrapper, text='Start simulation', command=startCommunication, width=15)
-    butStart.place(x=buttonXPos, y=buttonYPos + 0)
+    butStart.place(x=buttonXPos, y=buttonYPos + 30)
     hideSet.append(butStart)
 
     butLoad = Button(wrapper, text="Load from file", command=showLoadDialog, width=15)
-    butLoad.place(x=buttonXPos, y=buttonYPos + 30)
+    butLoad.place(x=buttonXPos, y=buttonYPos + 60)
     hideSet.append(butLoad)
 
     # butTest = Button(wrapper, text="Test connection", command=startCommunication, width=15)
@@ -228,19 +232,36 @@ def showLoadDialog():
     parseInputFile(loadfile)
 
 
+def loadParamsFromForm():
+    '''
+    Loading parameters from entries if they are not empty
+    :return:
+    '''
+    try:
+        emasValues['iterations'] = int(entParamIterations.get())
+        emasValues['numberOfAgents'] = int(entParamAgents.get())
+        emasValues['dimensions'] = int(entParamDimensions.get())
+        emasValues['energyLossFactor'] = int(entParamLossEnergy.get())
+        emasValues['numberOfIslands'] = int(entParamIslands.get())
+        emasValues['energyOnStart'] = int(entParamStartEnergy.get())
+        emasValues['minEnergy'] = int(entParamMinEnergy.get())
+        emasValues['genotypeRandomnessFactor'] = int(entParamGenotype.get())
+        emasValues['iterationStat'] = int(entParamStats.get())
+    except:
+        print "error while loading from entries"
+
+    #print emasValues
+
+
 def startCommunication():
     '''
     Testing Py4J connection - will be removed in further versions
     :return:
     '''
-
+    loadParamsFromForm()
     try:
         gateway = JavaGateway(GatewayClient(port=gatewayPort))
         dataStack = gateway.entry_point.getStack()
-        # if dataStack.size > 0:
-        #     plottingTable = dataStack.pop()
-        # if dataStack.size() == 0:
-        #     dataStack.push("czesc jestem GUI")
         tkMessageBox.showinfo("Py4J connection",
                               "Connection successful!")
         startSimulation(dataStack)
@@ -249,7 +270,7 @@ def startCommunication():
                                "Wrong port %s or server does not exist at all!" % gatewayPort)
 
 
-def testPlotData():
+def plotData():
     '''
     Just testing plotting library, will be removed
     :return:
@@ -259,12 +280,12 @@ def testPlotData():
     f.clf()
     plota = f.add_subplot(111)
 
-    t = arange(0.0, 1.0, 0.01)
-    s = sin(2 * pi * t)
+    t = arange(0, dataPoints.__len__()+1)
+    s = dataPoints
     plota.plot(t, s)
 
     dataPlot.show()
-    dataPlot.get_tk_widget().place(x=0, y=0, width=winWid * 0.8, height=winHei)
+    dataPlot.get_tk_widget().place(x=0, y=0, width=winWid, height=winHei)
 
 
 def sendParameters(dataStack):
@@ -282,6 +303,17 @@ def sendParameters(dataStack):
                                    "Sending parameters failed")
     
 
+def loadDrawData(dataStack):
+    while not dataStack.gui():
+        #time.sleep(5)
+        print dataStack.getInternalList
+    DataToPlot = dataStack.getInternalList
+    print DataToPlot
+    for e in DataToPlot:
+        dataPoints.append(e[e.index('s=')+2:])
+
+
+
 def startSimulation(dataStack):
     '''
     Preparing to start simulation and enabling plot update (will be added in future)
@@ -290,7 +322,8 @@ def startSimulation(dataStack):
     '''
     sendParameters(dataStack)
     dataStack.isR()
-    testPlotData()
+    loadDrawData(dataStack)
+    plotData()
 
 
 window.protocol("WM_DELETE_WINDOW", lambda: window.destroy())
