@@ -125,6 +125,6 @@ public class Simulation implements ISimulation {
     }
 
     private void generateStatistics(){
-   		this.stack.push("iteracja = "+this.currentIteration + ", bestFitness: " + this.bestFitness);
+   		this.stack.push("iteracja="+this.currentIteration + ",bestFitness=" + this.bestFitness);
     }
 }
