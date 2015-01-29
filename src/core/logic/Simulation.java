@@ -12,8 +12,6 @@ import agent.agent.AgentFactory;
 import agent.exceptions.WrongGenotypeException;
 import agent.fitness_evaluator.SimpleFunctionFitnessProxy;
 import agent.function.SimpleFunction;
-import sun.management.resources.agent;
-
 /**
  * Created by Joanna on 2014-11-25.
  */
@@ -26,22 +24,22 @@ public class Simulation implements ISimulation {
     private AgentFactory agentFactory;
     private AgentSettings agentSettings;
     private Stack stack;
-    
+
     public Simulation(Stack s){
-    	this.stack=s;
+        this.stack=s;
     }
 
     @Override
     public void init(DataProvider dataProvider) {
-    	SimpleFunctionFitnessProxy asdasd = new SimpleFunctionFitnessProxy(new SimpleFunction());
-    	this.simulationSettings = dataProvider.getSimulationSettings();
+        SimpleFunctionFitnessProxy asdasd = new SimpleFunctionFitnessProxy(new SimpleFunction());
+        this.simulationSettings = dataProvider.getSimulationSettings();
         this.environmentSettings = dataProvider.getEnvironmentSettings();
         this.currentIteration = 1;
         this.agentSettings = dataProvider.getAgentsSettings();
-        this.agentFactory = new AgentFactory(dataProvider.getAgentsSettings().getEnergyLossFactor(), 
-				dataProvider.getAgentsSettings().getEenotypeRandomnessFactor(), 
-				dataProvider.getAgentsSettings().getEnergyOnStart(), 
-				asdasd);
+        this.agentFactory = new AgentFactory(dataProvider.getAgentsSettings().getEnergyLossFactor(),
+                dataProvider.getAgentsSettings().getEenotypeRandomnessFactor(),
+                dataProvider.getAgentsSettings().getEnergyOnStart(),
+                asdasd);
         this.setEnvironment();
     }
 
@@ -59,20 +57,20 @@ public class Simulation implements ISimulation {
         environment = new Environment();
         environment.create(this.environmentSettings);
         try {
-			this.fillEnvironment();
-		} catch (WrongGenotypeException e) {
-			e.printStackTrace();
-		}
+            this.fillEnvironment();
+        } catch (WrongGenotypeException e) {
+            e.printStackTrace();
+        }
     }
 
     private void fillEnvironment() throws WrongGenotypeException{
-    	for(int i=0; i < environmentSettings.getNumberOfIslands(); i++){
-    		environment.chooseIsland(i);    		
-    		for(int j = 0; j < environmentSettings.getNumberOfAgents(); j++){
-    			environment.tryPut(this.agentFactory.createAgent());
-    		}
-    		environment.resetCurrent();
-    	}
+        for(int i=0; i < environmentSettings.getNumberOfIslands(); i++){
+            environment.chooseIsland(i);
+            for(int j = 0; j < environmentSettings.getNumberOfAgents(); j++){
+                environment.tryPut(this.agentFactory.createAgent());
+            }
+            environment.resetCurrent();
+        }
     }
 
     private void evolution(){
@@ -80,7 +78,7 @@ public class Simulation implements ISimulation {
             this.iterateIslands();
             if( ( this.currentIteration % this.simulationSettings.getIterationStat() ) == 0)
             {
-            	this.generateStatistics();
+                this.generateStatistics();
             }
             ++currentIteration;
         }
@@ -129,10 +127,20 @@ public class Simulation implements ISimulation {
     }
 
 
-    private void checkForDead(Agent agent, LinkedList<Agent> agents){}
+    private void checkForDead(Agent agent, LinkedList<Agent> agents){
+        if(agent.getEnergy() < agentSettings.getMinEnergy())
+            environment.removeAgent(agent);
+        if(agents.size() > 1){
+            if(agents.getLast().getEnergy() < agentSettings.getMinEnergy())
+                environment.removeAgent(agents.getFirst());
+        }
+        if(agents.getFirst().getEnergy() < agentSettings.getMinEnergy())
+            environment.removeAgent(agents.getLast());
+    }
 
 
     private void generateStatistics(){
-   		this.stack.push("iteracja="+this.currentIteration + ",bestFitness=" + this.environment.getB());
+        //this.stack.push("iteracja="+this.currentIteration + ",bestFitness=" + this.environment.getBestFitness());
+        this.stack.push(String.valueOf( this.environment.getBestFitness()));
     }
 }

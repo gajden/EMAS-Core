@@ -83,18 +83,25 @@ public class Core implements ICore {
         simulation.init(dataProvider);
     }
     public void clean (){
+    	while (!this.stack.done()){}
+    	/*
     	try {
 			System.in.read();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//*/
     	this.gatewayServer.shutdown();
     	this.p.destroy();
     	System.out.println("Gateway Server & GUI Shutdown");
     }
     
+    public void simulation_end(){
+    	//this.stack.rForGui();
+    	this.stack.isDone();
+    }
+    
 	public void printStackforTests() {
-		this.stack.rForGui();
 		for(String a : this.stack.getInternalList()){
 			System.out.println(a);
 		}

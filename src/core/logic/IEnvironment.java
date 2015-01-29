@@ -15,7 +15,6 @@ import agent.agent.Agent;
 @SuppressWarnings("unused")
 public interface IEnvironment {
     public void create(EnvironmentSettings settings);
-    public void deleteAgent(Agent agent);
     public Agent getFirst();
     public Agent getLast();
     public Agent getNext();
@@ -27,7 +26,6 @@ public interface IEnvironment {
     public void swap(Agent firstAgent, Agent secondAgent);
     public Agent getAgent(int position);
     public Agent getCurrent();
-    public void setAgent(Agent agent);
     public boolean hasNext();
 	void resetCurrent();
 }

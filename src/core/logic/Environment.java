@@ -16,35 +16,30 @@ import agent.agent.Agent;
 @SuppressWarnings("unused")
 public class Environment implements IEnvironment {
 	double inf = Double.POSITIVE_INFINITY;
+    private double bestFitness = inf;
     private ArrayList<LinkedList<Agent>> islands;
     private ArrayList<Integer> agentsNumber;
     private int currentIsland;
     private int currentAgent;
     private EnvironmentSettings settings;
     private int margin = 10;
-    private double best = Double.POSITIVE_INFINITY;
-    
+
     @Override
     public void create(EnvironmentSettings settings) {
     	this.agentsNumber = new ArrayList<Integer>();
-    	this.settings = settings;
-    	this.currentIsland = 0;//indeks
-    	this.currentAgent = 0;//indeks
-    	this.islands = new ArrayList<LinkedList<Agent>>();
-    	for (int i = 0; i<this.settings.getNumberOfIslands(); i++){
-    		islands.add(new LinkedList<Agent>());
-    		agentsNumber.add(settings.getNumberOfAgents());
-    	}
-   }
-
-    @Override
-    public void deleteAgent(Agent agent) {
-
+        this.settings = settings;
+        this.currentIsland = 0;//indeks
+        this.currentAgent = 0;//indeks
+        this.islands = new ArrayList<LinkedList<Agent>>();
+        for (int i = 0; i<this.settings.getNumberOfIslands(); i++){
+            islands.add(new LinkedList<Agent>());
+            agentsNumber.add(0);
+        }
     }
 
     @Override
     public Agent getFirst() {
-    	this.currentAgent=0;
+        this.currentAgent=0;
         return islands.get(currentIsland).getFirst();
     }
 
@@ -55,31 +50,31 @@ public class Environment implements IEnvironment {
 
     @Override
     public Agent getNext() {
-    	if((currentAgent+1)<settings.getNumberOfAgents()){
-    		this.currentAgent++;
-    		return islands.get(currentIsland).get(currentAgent);
+        if((currentAgent + 1) < agentsNumber.get(currentIsland)){
+            this.currentAgent++;
+            return islands.get(currentIsland).get(currentAgent);
         }
-    	return null;
+        return null;
     }
 
     @Override
     public Agent getPrev() {
-    	if(this.currentAgent>0){
-    		return islands.get(currentIsland).get(currentAgent-1);
-    	}
+        if(this.currentAgent > 0){
+            return islands.get(currentIsland).get(currentAgent - 1);
+        }
         return null;
     }
 
     @Override
     public LinkedList<Agent> getNeighbours() {
-    	LinkedList<Agent> n = new LinkedList<Agent>();
-    	Agent a = this.getPrev();
-    	if(a != null )
-    		n.add(a);
-    	a = this.getNext();
-    	if(a != null)
-    	   	n.add(a);
-    	return n;
+        LinkedList<Agent> n = new LinkedList<Agent>();
+        Agent a = this.getPrev();
+        if(a != null )
+            n.add(a);
+        a = this.getNext();
+        if(a != null)
+            n.add(a);
+        return n;
     }
 
     @Override
@@ -89,12 +84,12 @@ public class Environment implements IEnvironment {
 
     @Override
     public int getNumberOfAgents() {
-        return settings.getNumberOfAgents();
+        return agentsNumber.get(currentIsland);
     }
 
     @Override
     public void chooseIsland(int island) {
-    	this.currentIsland = island;
+        this.currentIsland = island;
     }
 
     @Override
@@ -108,11 +103,11 @@ public class Environment implements IEnvironment {
     }
 
     @Override
-    
+
     public void resetCurrent(){
-    	this.currentAgent = 0;
+        this.currentAgent = 0;
     }
-    
+
     public Agent getCurrent() {
         return islands.get(currentIsland).get(currentAgent);
     }
@@ -123,29 +118,21 @@ public class Environment implements IEnvironment {
     }
 
 
-    @Override
-    public void setAgent(Agent agent) {
-    	//this.islands.get(currentIsland).get(currentAgent) = agent;
-    	currentAgent++;
-    }
-
     public void tryPut(Agent agent){
         if(agentsNumber.get(currentIsland) <= settings.getNumberOfAgents() + margin){
             this.islands.get(currentIsland).add(agent);
+            this.agentsNumber.set(currentIsland, agentsNumber.get(currentIsland)+1);
+            if(agent.getFitness() < this.bestFitness) this.bestFitness = agent.getFitness();
         }
-        
-        if(agent.getFitness() < best)
-        	best = agent.getFitness();
     }
 
-    public double getB(){
-    	return this.best;
-    }
-    
     public void removeAgent(Agent agent){
         if(this.islands.get(currentIsland).contains(agent))
             this.islands.get(currentIsland).remove(agent);
+        	this.agentsNumber.set(currentIsland, agentsNumber.get(currentIsland)-1);
     }
     
- 
+    public double getBestFitness(){
+    	return this.bestFitness;
+    }
 }

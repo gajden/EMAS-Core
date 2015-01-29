@@ -2,7 +2,6 @@ package gui.java;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * Created by ant6 on 2015-01-02.
@@ -54,5 +53,13 @@ public class Stack {
     
     public boolean gui(){
     	return this.r==2;
+    }
+    
+    public boolean done(){
+    	return this.r==3;
+    }
+    
+    public void isDone(){
+    	this.r=3;
     }
 }

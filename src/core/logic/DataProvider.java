@@ -32,11 +32,6 @@ public class DataProvider implements IDataProvider {
     }
 
     @Override
-    public void updateConfigData(String path) {
-
-    }
-
-    @Override
     public EnvironmentSettings getEnvironmentSettings() {
         return environmentSettings;
     }

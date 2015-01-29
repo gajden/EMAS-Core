@@ -1,9 +1,5 @@
 package core.logic;
 
-/**TODO:
-*->Simulation.iterateAgents(), sypie sie w chooseAction()
-*/
-
 import java.util.Map;
 
 /**
@@ -14,9 +10,10 @@ public class App {
         Core core = new Core();
         core.init();
         Map<String, Double> map = core.parseData(core.getData());  
-        System.out.println("Dane z GUI: " + map);
+        //System.out.println("Dane z GUI: " + map);
         core.initProv(map);
         core.start();
+        core.simulation_end();
         core.printStackforTests();
         core.clean();
     }

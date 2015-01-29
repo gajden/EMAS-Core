@@ -12,7 +12,6 @@ import java.util.Map;
  */
 public interface IDataProvider {
     public void initDataProvider(Map<String, Double> settings);
-    public void updateConfigData(String path);
     public EnvironmentSettings getEnvironmentSettings();
     public AgentSettings getAgentsSettings();
     public SimulationSettings getSimulationSettings();
